@@ -6,6 +6,7 @@ import trusted from '../images/trusted.png'
 import { BsArrowRight } from "react-icons/bs";
 import clogo from '../images/collegelogo.jpg'
 import '../App.css'
+import Courses from "../components/Courses.jsx";
 
 function Homepage(){
 
@@ -100,6 +101,8 @@ function Homepage(){
   </div>
 
 </div>
+
+<Courses/>
 
 </>
     );
