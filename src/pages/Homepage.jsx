@@ -7,6 +7,7 @@ import { BsArrowRight } from "react-icons/bs";
 import clogo from '../images/collegelogo.jpg'
 import '../App.css'
 import Courses from "../components/Courses.jsx";
+import BlogScreen from "../components/BlogScreen.jsx";
 
 function Homepage(){
 
