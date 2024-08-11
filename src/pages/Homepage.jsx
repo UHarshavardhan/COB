@@ -8,13 +8,14 @@ import clogo from '../images/collegelogo.jpg'
 import '../App.css'
 import Courses from "../components/Courses.jsx";
 import BlogScreen from "../components/BlogScreen.jsx";
+import Aboutus from "../components/aboutus.jsx";
 
 function Homepage(){
 
 
     return (
         <>
-<Navigation/>
+<Navigation />
 <div className="main-header flex items-center justify-center mt-20" > 
                 <div className="sub-header flex flex-col justify-center items-center ">
                     <div className="heading flex outline-double outline-gray-300 shadow-2xl shadow-slate-300 justify-center w-100 rounded-2xl p-1">
@@ -104,7 +105,7 @@ function Homepage(){
 </div>
 
 <Courses/>
-
+<Aboutus/>
 </>
     );
 }

@@ -8,7 +8,7 @@ function Navigation(){
 
 return (
 <>
-<div className='navi bg-white shadow rounded-lg h-24 gap-16 flex items-center justify-between px-4'>
+<div className='navi bg-white rounded-lg h-24 gap-16 flex items-center justify-between px-4'>
       <div>
         <img src={logo} alt="Logo" className='h-40' /> 
       </div>
