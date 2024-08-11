@@ -9,8 +9,8 @@ import book from '../images/book.png'
 function aboutus(){
 return (
     <>
-    <div className="flex flex-row mt-7 ">
-       <div className="mt-96 flex flex-col  ml-12">
+    <div className="flex flex-row mt-7 overflow-x-hidden ">
+       <div className="mt-96 flex flex-col ml-12 ">
   <div className="relative w-[400px] h-[500px] bg-pink-500 overflow-visible">
     <img 
       src={boy}
@@ -36,7 +36,7 @@ opacity-[45%] w-[513px] h-[55px] border-2 rounded-xl relative top-72 flex justif
            <span className="text-[#2E3192] text-[64px]
 ">Know Why We here to counsel You!</span>
     </div>
- <div className="rectangle relative top-80" >
+ <div className="rectangle relative top-80 w-[600px]" >
    <img src={rectangle}/>
  </div>
  <div className="flex flex-row relative top-[350px]">
