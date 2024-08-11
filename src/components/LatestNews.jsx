@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient'
@@ -8,7 +10,7 @@ const colours = ['white'];
 
 const PAGE_SIZE = 3; // Number of images per page
 
-const BlogScreen = () => {
+const LatestNews = () => {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const navigator = useNavigate();
@@ -55,8 +57,10 @@ const BlogScreen = () => {
   const selectedBlogs = blogs.slice(startIndex, startIndex + PAGE_SIZE);
 
   return (
-    <div id="blogs" className="flex flex-col items-center justify-center  py-8">
-      <h1 className="text-3xl lg:text-5xl font-bold mb-4 text-center lg:text-left text-blue-600">Our Blogs</h1>
+    <div id="blogs" className="flex bg-gradient-to-b from-purple-300 to-purple-100 py-10 px-6 flex-col items-center justify-center  py-8">
+      <h1 className="text-3xl lg:text-5xl font-bold mb-4 text-center lg:text-left text-blue-600">Latest News</h1>
+      <p className="mb-8 text-center lg:text-xl text-gray-600">Catch the Latest Career & Education-Related Headlines! 
+      We deliver up-to-the-minute happenings in the job market and exciting career opportunities</p>
       
       {/* Mobile View */}
       <div className="w-full md:hidden overflow-x-auto">
@@ -127,5 +131,6 @@ const BlogScreen = () => {
     </div>
   );
 };
+export default LatestNews;
 
-export default BlogScreen;
+

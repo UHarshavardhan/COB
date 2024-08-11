@@ -3,8 +3,10 @@ import Navigation from './Navigation';
 
 const ScholarshipHeader = ({ breadcrumb, title, subtitle }) => {
   return (
-    <div className="bg-gradient-to-r h-[40vh] lg:h-[60vh] from-cyan-400 to-fuchsia-400 p-4 lg:p-8">
+    <div className="bg-gradient-to-r h-[40vh] lg:h-[60vh] from-[#a1a2f8] to-[#bf90e7] p-4 lg:p-8">
       <Navigation />
+
+     
       
       <div className="text-xs lg:text-sm text-gray-200 mt-2 lg:mt-[5%]">
         {breadcrumb}

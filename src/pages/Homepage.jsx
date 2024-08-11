@@ -9,6 +9,8 @@ import '../App.css'
 import Courses from "../components/Courses.jsx";
 import BlogScreen from "../components/BlogScreen.jsx";
 import Aboutus from "../components/aboutus.jsx";
+import CollegeRanking from "../components/CollegeRanking.jsx";
+import LatestNews from "../components/LatestNews.jsx";
 
 function Homepage(){
 
@@ -106,6 +108,9 @@ function Homepage(){
 
 <Courses/>
 <Aboutus/>
+<CollegeRanking/>
+<LatestNews/>
+<BlogScreen />
 </>
     );
 }

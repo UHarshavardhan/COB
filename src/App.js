@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Homepage from './pages/Homepage.jsx';
 import BlogDetailScreen from './pages/BlogFullScreen.jsx';
 import ScholarshipScreen from './pages/Scholarship.jsx';
+import Footer from './components/Footer.jsx';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         {/* <Route path="/login" element={<LoginPage />} /> */}
         {/* <Route path="/signup" element={<SignUpPage />} /> */}
       </Routes>
+      <Footer />
     </Router>
   );
 }
