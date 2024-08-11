@@ -11,6 +11,8 @@ import BlogScreen from "../components/BlogScreen.jsx";
 import Aboutus from "../components/aboutus.jsx";
 import CollegeRanking from "../components/CollegeRanking.jsx";
 import LatestNews from "../components/LatestNews.jsx";
+import Review from '../components/review.jsx';
+import Scroll from "../components/scroll.jsx";
 
 function Homepage(){
 
@@ -108,6 +110,9 @@ function Homepage(){
 
 <Courses/>
 <Aboutus/>
+
+<Review/>
+<Scroll/>
 <CollegeRanking/>
 <LatestNews/>
 <BlogScreen />

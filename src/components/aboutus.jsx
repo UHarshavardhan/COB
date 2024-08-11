@@ -27,7 +27,7 @@ return (
 </div>
 <div className="flex flex-col relative left-36">
     <div className="bg-[#2E319273]
-opacity-[45%] w-[513px] h-[55px] border-2 rounded-xl relative top-72 flex justify-center items-center">
+ w-[513px] h-[55px] rounded-xl relative top-72 flex justify-center items-center">
         <span className="text-white justify-center text-justify">KNOW ABOUT US</span>
  
     </div>
