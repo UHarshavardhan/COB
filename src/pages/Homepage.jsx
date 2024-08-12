@@ -13,6 +13,7 @@ import CollegeRanking from "../components/CollegeRanking.jsx";
 import LatestNews from "../components/LatestNews.jsx";
 import Review from '../components/review.jsx';
 import Scroll from "../components/scroll.jsx";
+import Subscribe from "../components/subscribe.jsx";
 
 function Homepage(){
 
@@ -116,6 +117,7 @@ function Homepage(){
 <CollegeRanking/>
 <LatestNews/>
 <BlogScreen />
+<Subscribe/>
 </>
     );
 }

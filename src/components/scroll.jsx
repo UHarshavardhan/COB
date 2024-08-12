@@ -31,7 +31,7 @@ function Scroll() {
                     </div>
                 </div>
 
-                {/* Pink Background for alternate card */}
+               
                 <div className="snap-center flex-shrink-0 flex flex-col border-white shadow-xl w-[567px] h-[400px]  rounded-2xl shadow-slate-300 mx-2 bg-[#E9D6F9]">
                     <div className="flex justify-center pt-4">
                         <img src={google} alt="google" className="w-[150px] h-[47px]" />
@@ -54,7 +54,7 @@ function Scroll() {
                     </div>
                 </div>
 
-                {/* Pink Background for alternate card */}
+                
                 <div className="snap-center flex-shrink-0 flex flex-col border-white shadow-xl w-[567px] h-[400px] rounded-2xl shadow-slate-300 mx-2 bg-[#E9D6F9
 ]">
                     <div className="flex justify-center pt-4">
