@@ -57,7 +57,7 @@ const LatestNews = () => {
   const selectedBlogs = blogs.slice(startIndex, startIndex + PAGE_SIZE);
 
   return (
-    <div id="blogs" className="flex bg-gradient-to-b from-purple-300 to-purple-100 py-10 px-6 flex-col items-center justify-center  py-8">
+    <div id="blogs" className="flex bg-gradient-to-b from-purple-300 to-purple-100 py-10 px-6 flex-col items-center justify-center py-8">
       <h1 className="text-3xl lg:text-5xl font-bold mb-4 text-center lg:text-left text-blue-600">Latest News</h1>
       <p className="mb-8 text-center lg:text-xl text-gray-600">Catch the Latest Career & Education-Related Headlines! 
       We deliver up-to-the-minute happenings in the job market and exciting career opportunities</p>

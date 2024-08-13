@@ -13,7 +13,7 @@ function subscribe(){
                </div>
                <div className="flex flex-row mt-9 justify-between">
               <input type="text" placeholder="Enter your email id" className="mx-9 w-[280px] h-[50px] border-[1px] rounded-lg border-black text-center text-black placeholder-black"/>
-              <input type="text" placeholder="Enter your moblie no" className="mx-9 w-[280px] h-[50px] border-[1px] rounded-lg border-black text-center text-black placeholder-black"> </input>
+              <input type="text" placeholder="Enter your moblie no" className="mx-9 w-[280px] h-[50px] border-[1px] rounded-lg border-black text-center text-black placeholder-black"/> 
                </div>
             </div>
         </div>

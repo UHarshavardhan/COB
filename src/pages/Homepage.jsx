@@ -111,10 +111,9 @@ function Homepage(){
 
 <Courses/>
 <Aboutus/>
-
+<CollegeRanking/>
 <Review/>
 <Scroll/>
-<CollegeRanking/>
 <LatestNews/>
 <BlogScreen />
 <Subscribe/>
