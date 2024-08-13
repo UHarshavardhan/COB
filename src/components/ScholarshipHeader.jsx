@@ -11,10 +11,10 @@ const ScholarshipHeader = ({ breadcrumb, title, subtitle }) => {
       <div className="text-xs lg:text-sm text-gray-200 mt-2 lg:mt-[5%]">
         {breadcrumb}
       </div>
-      <h1 className="text-2xl lg:text-6xl font-bold text-black mt-2 lg:mt-4">
+      <h1 className="text-2xl lg:text-5xl font-bold text-black mt-2 lg:mt-4">
         {title}
       </h1>
-      <p className="text-base lg:text-4xl text-gray-200 mt-2 lg:mt-4 lg:mx-[20%]">
+      <p className="text-base lg:text-2xl text-gray-200 mt-2 lg:mt-4 lg:mx-[20%]">
         {subtitle}
       </p>
     </div>
