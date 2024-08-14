@@ -15,6 +15,7 @@ import Review from '../components/review.jsx';
 import Scroll from "../components/scroll.jsx";
 import Subscribe from "../components/subscribe.jsx";
 import MobileCollegeRanking from "../components/mobileCollegeRanking.jsx";
+import Collegetab from "../components/Colleges.jsx";
 
 function Homepage() {
     return (
@@ -100,6 +101,7 @@ function Homepage() {
             <LatestNews/>
             <BlogScreen />    
             <Subscribe/> 
+            <Collegetab/>
         </>
     );
 }
