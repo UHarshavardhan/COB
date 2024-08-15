@@ -97,7 +97,7 @@ function Homepage() {
             <Courses/>
             <div className="lg:block hidden"><CollegeRanking/></div>
             <div className="block lg:hidden"><MobileCollegeRanking /></div>
-            <Aboutus/>
+            <div className="lg:block hidden"><Aboutus/></div>
             <Review/>
             <LatestNews/>
             <BlogScreen />    

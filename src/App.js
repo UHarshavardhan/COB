@@ -7,6 +7,7 @@ import ScholarshipScreen from './pages/Scholarship.jsx';
 import Footer from './components/Footer.jsx';
 import ScholarshipFormScreen from './pages/ScholarshipFormScreen.jsx';
 import EnquireForm from './pages/enquireForm.jsx';
+import Coursedetails from './pages/coursedetails.jsx';
 
 
 
@@ -19,6 +20,8 @@ function App() {
         <Route path="/scholarship" element={<ScholarshipScreen />} />
         <Route path="/enquireform" element={<EnquireForm />} />
         <Route path="/scholarshipform" element={<ScholarshipFormScreen />} />
+        <Route path="/coursedetails" element={<Coursedetails />} />
+        <Route path="*" element={<Homepage />} />
 
 
         {/* Uncomment and ensure these components exist for the following routes to work */}
