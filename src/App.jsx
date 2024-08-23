@@ -65,7 +65,8 @@ function App() {
         <Route path="/coursedetails" element={<Coursedetails />} />
         <Route path="/admin" element={
             <div className="flex ">
-              <Sidebar onSelect={setSelectedComponent} />
+              <Side
+              bar onSelect={setSelectedComponent} />
               <div className="flex-1 bg-[#fdf1e2]  justify-center items-center p-4">
                 {renderComponent()}
               </div>

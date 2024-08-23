@@ -5,7 +5,7 @@ const db = require('./firebase');
 export const createAccommodationEnquiry = async (enquiry) => {
   try {
     const newEnquiry = {
-      id: uuidv4(), // Generate a unique ID
+      id: uuidv4(), 
       ...enquiry,
       createdAt: new Date(),
     };
