@@ -1,29 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getAllScholarships } from './../firebase/Scholarships';
 import ScholarshipHeader from '../components/ScholarshipHeader';
 
-// Dummy scholarship data
-const dummyScholarships = [
-  {
-    id: 1,
-    name: 'Tata Capital Pankh Scholarship Program',
-    deadline: 'July 16, 2024',
-    amount: 'INR 10,000 to INR 12,000',
-    categories: ['Graduation'],
-    gender: ['Male', 'Female'],
-    religion: ['Hindu'],
-    courses: ['Engineering'],
-  },
-  // Add more scholarship objects here as needed
-];
+const itemsPerPage = 10;
 
 const filtersData = {
   categories: ['Graduation', 'Post Graduation', 'Post Graduation Diploma'],
   gender: ['Male', 'Female', 'Transgender'],
-  religion: ['Buddhism', 'Christian', 'Hindu', 'Jain', 'Sikh', 'Parsi', 'Muslim'],
-  courses: ['Engineering', 'Medical', 'Management', 'Fellowship', 'Sports'],
+  religion: ['Buddhism', 'Christian', 'Hindu', 'Jain', 'Sikh', 'Parsi', 'Muslim', 'Any'],
+  course: ['Engineering', 'Medical', 'Management', 'Fellowship', 'Sports'],
 };
 
-const itemsPerPage = 10;
+
 
 const FilterUI = ({ filters, handleFilterChange, resetFilters }) => {
   const [collapsedSections, setCollapsedSections] = useState({});
@@ -44,7 +32,7 @@ const FilterUI = ({ filters, handleFilterChange, resetFilters }) => {
         </button>
       </div>
       {Object.keys(filtersData).map((filterType) => (
-        <div key={filterType} className="mb-4  lg:mx-[10%] border-b pb-4">
+        <div key={filterType} className="mb-4 lg:mx-[10%] border-b pb-4">
           <div
             className="flex justify-between items-center cursor-pointer"
             onClick={() => toggleCollapse(filterType)}
@@ -66,16 +54,14 @@ const FilterUI = ({ filters, handleFilterChange, resetFilters }) => {
                       checked={filters[filterType].includes(item)}
                       onChange={() => handleFilterChange(filterType, item)}
                     />
-                    
                   </label>
                 ))}
               </div>
             </div>
-              )}
-
+          )}
         </div>
       ))}
-      <button className="w-full bg-blue-500 text-white px-4 py-2 rounded mt-4">
+      <button  className="w-full bg-blue-500 text-white px-4 py-2 rounded mt-4">
         Apply
       </button>
     </div>
@@ -87,9 +73,28 @@ const ScholarshipList = () => {
     categories: [],
     gender: [],
     religion: [],
-    courses: [],
+    course: [],
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [scholarships, setScholarships] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchScholarships = async () => {
+      setLoading(true);
+      try {
+        const querySnapshot = await getAllScholarships();
+        console.log(querySnapshot)
+        setScholarships( querySnapshot);
+      } catch (error) {
+        console.error('Error fetching scholarships: ', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchScholarships();
+  }, []);
 
   const handleFilterChange = (filterType, value) => {
     setFilters((prevFilters) => {
@@ -110,18 +115,18 @@ const ScholarshipList = () => {
       categories: [],
       gender: [],
       religion: [],
-      courses: [],
+      course: [],
     });
     setCurrentPage(1);
   };
 
-  const filteredScholarships = dummyScholarships.filter((scholarship) => {
-    const { categories, gender, religion, courses } = filters;
+  const filteredScholarships = scholarships.filter((scholarship) => {
+    const { categories, gender, religion, course } = filters;
     return (
       (categories.length === 0 || categories.some((cat) => scholarship.categories.includes(cat))) &&
       (gender.length === 0 || gender.some((gen) => scholarship.gender.includes(gen))) &&
       (religion.length === 0 || religion.some((rel) => scholarship.religion.includes(rel))) &&
-      (courses.length === 0 || courses.some((course) => scholarship.courses.includes(course)))
+      (course.length === 0 || course.some((course) => scholarship.course.includes(course)))
     );
   });
 
@@ -142,49 +147,57 @@ const ScholarshipList = () => {
           />
         </div>
         <div className="w-full sm:w-3/4 bg-white p-4 rounded-lg shadow">
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th className="text-left py-2">Sr no.</th>
-                <th className="text-left py-2">Scholarship</th>
-                <th className="text-left py-2">Deadline</th>
-                <th className="text-left py-2">Amount</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedScholarships.map((scholarship, index) => (
-                <tr key={scholarship.id} className="border-b">
-                  <td className="py-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                  <td className="py-2">{scholarship.name}</td>
-                  <td className="py-2">{scholarship.deadline}</td>
-                  <td className="py-2">{scholarship.amount}</td>
-                  <td className="py-2">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded">Apply now</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="flex justify-between mt-4">
-            <button
-              className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <div>
-              Page {currentPage} of {totalPages}
-            </div>
-            <button
-              className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
-          </div>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <>
+              <table className="w-full">
+                <thead>
+                  <tr>
+                    <th className="text-left py-2">Sr no.</th>
+                    <th className="text-left py-2">Scholarship</th>
+                    <th className="text-left py-2">Deadline</th>
+                    <th className="text-left py-2">Amount</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paginatedScholarships.map((scholarship, index) => (
+                    <tr key={scholarship.id} className="border-b">
+                      <td className="py-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                      <td className="py-2">{scholarship.name}</td>
+                      <td className="py-2">{scholarship.deadline}</td>
+                      <td className="py-2">{scholarship.amount}</td>
+                      <td className="py-2">
+                      <a href={scholarship.link} target="_blank"  className="bg-blue-500 text-white px-4 py-2 rounded">
+                        Apply now
+                      </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="flex justify-between mt-4">
+                <button
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+                <div>
+                  Page {currentPage} of {totalPages}
+                </div>
+                <button
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -1,28 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Select from 'react-select';
+import {
+  createScholarship,
+  getAllScholarships,
+  updateScholarship,
+  deleteScholarship
+} from './../../firebase/Scholarships'; // Adjust the import path as needed
 
-const Scholarships = ( { onSelect }) => {
-  const [scholarships, setScholarships] = useState([
-    { id: 1, name: "Aubrey", deadline: "2024-03-12", amount: "XXXX", categories: "Open", gender: "Male", religion: "Any", course: "Any" },
-    { id: 2, name: "Jane", deadline: "2024-03-12", amount: "XXXX", categories: "Open", gender: "Male", religion: "Any", course: "Any" },
-    // Add more scholarships if needed
-  ]);
-  
+const Scholarships = () => {
+  const [scholarships, setScholarships] = useState([]);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [currentScholarship, setCurrentScholarship] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 7;
 
-  const handleAdd = (scholarship) => {
-    setScholarships([...scholarships, { id: scholarships.length + 1, ...scholarship }]);
+  useEffect(() => {
+    const fetchScholarships = async () => {
+      const data = await getAllScholarships();
+      setScholarships(data);
+    };
+    fetchScholarships();
+  }, []);
+
+  const handleAdd = async (scholarship) => {
+    await createScholarship(scholarship);
+    const data = await getAllScholarships(); // Refresh the list
+    setScholarships(data);
     setIsAddOpen(false);
   };
 
-  const handleEdit = (scholarship) => {
-    setScholarships(scholarships.map(s => (s.id === scholarship.id ? scholarship : s)));
+  const handleEdit = async (scholarship) => {
+    await updateScholarship(scholarship.id, scholarship);
+    const data = await getAllScholarships(); // Refresh the list
+    setScholarships(data);
     setIsEditOpen(false);
   };
 
-  const handleDelete = (id) => {
-    setScholarships(scholarships.filter(s => s.id !== id));
+  const handleDelete = async (id) => {
+    await deleteScholarship(id);
+    const data = await getAllScholarships(); // Refresh the list
+    setScholarships(data);
   };
 
   const openEditModal = (scholarship) => {
@@ -30,21 +48,38 @@ const Scholarships = ( { onSelect }) => {
     setIsEditOpen(true);
   };
 
-  const handleSelect = (section) => {
-    onSelect(section);
 
-    };
+  // Calculate total pages
+  const totalPages = Math.ceil(scholarships.length / itemsPerPage);
 
+  // Render scholarships for the current page
   const renderScholarships = () => {
-    return scholarships.slice(0, 10).map((scholarship, index) => (
-      <tr className="border-b hover:bg-gray-50" onClick={() =>{handleSelect('ScholarshipEnquiry')}} key={scholarship.id}>
-        <td className="p-4">{index + 1}</td>
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentScholarships = scholarships.slice(startIndex, endIndex);
+
+    return currentScholarships.map((scholarship, index) => (
+      <tr className="border-b hover:bg-gray-50"  key={scholarship.id}>
+        <td className="p-4">{startIndex + index + 1}</td>
         <td className="p-4">{scholarship.name}</td>
         <td className="p-4">{scholarship.deadline}</td>
         <td className="p-4">{scholarship.amount}</td>
-        <td className="p-4">{scholarship.categories}</td>
-        <td className="p-4">{scholarship.gender}</td>
+        <td className="p-4">
+          {Array.isArray(scholarship.categories) ? scholarship.categories.join(', ') : scholarship.categories}
+        </td>
+        <td className="p-4">
+          {Array.isArray(scholarship.gender) ? scholarship.gender.join(', ') : scholarship.gender}
+        </td>
+        <td className="p-4">
+          {Array.isArray(scholarship.religion) ? scholarship.religion.join(', ') : scholarship.religion}
+        </td>
+        <td className="p-4">
+          {Array.isArray(scholarship.course) ? scholarship.course.join(', ') : scholarship.course}
+        </td>
         <td className="p-4 flex space-x-2">
+        {/* <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300" onClick={() => { handleSelect('ScholarshipEnquiry') }}>
+            <i className="fas fa-eye"></i>
+          </button> */}
           <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300" onClick={() => openEditModal(scholarship)}>
             <i className="fas fa-edit"></i>
           </button>
@@ -54,6 +89,10 @@ const Scholarships = ( { onSelect }) => {
         </td>
       </tr>
     ));
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -76,6 +115,8 @@ const Scholarships = ( { onSelect }) => {
             <th className="p-4 border-b">Amount</th>
             <th className="p-4 border-b">Categories</th>
             <th className="p-4 border-b">Gender</th>
+            <th className="p-4 border-b">Religion</th>
+            <th className="p-4 border-b">Course</th>
             <th className="p-4 border-b">Actions</th>
           </tr>
         </thead>
@@ -84,17 +125,33 @@ const Scholarships = ( { onSelect }) => {
         </tbody>
       </table>
 
-      {/* Pagination (example for 10 items per page) */}
+      {/* Pagination */}
       <div className="flex justify-between items-center mt-4">
-        <p className="text-sm text-gray-600">01 page of 21</p>
+        <p className="text-sm text-gray-600">{`Page ${currentPage} of ${totalPages}`}</p>
         <div className="flex space-x-2">
-          <button className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300">&lt;</button>
-          <button className="px-3 py-1 rounded-lg bg-blue-500 text-white">01</button>
-          <button className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300">02</button>
-          <button className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300">03</button>
-          <span className="px-3 py-1">...</span>
-          <button className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300">21</button>
-          <button className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300">&gt;</button>
+          <button 
+            className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            &lt;
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i + 1}
+              className={`px-3 py-1 rounded-lg ${currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+              onClick={() => handlePageChange(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button 
+            className="px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            &gt;
+          </button>
         </div>
       </div>
 
@@ -127,23 +184,58 @@ const Popup = ({ title, children, onClose }) => (
     </div>
   </div>
 );
+const categoryOptions = [
+  { value: 'Graduation', label: 'Graduation' },
+  { value: 'Post Graduation', label: 'Post Graduation' },
+  { value: 'Post Graduation Diploma', label: 'Post Graduation Diploma' },
+];
 
-// Scholarship Form Component
+const genderOptions = [
+  { value: 'Male', label: 'Male' },
+  { value: 'Female', label: 'Female' },
+  { value: 'Transgender', label: 'Transgender' },
+];
+
+const religionOptions = [
+  { value: 'Buddhism', label: 'Buddhism' },
+  { value: 'Christian', label: 'Christian' },
+  { value: 'Hindu', label: 'Hindu' },
+  { value: 'Jain', label: 'Jain' },
+  { value: 'Sikh', label: 'Sikh' },
+  { value: 'Parsi', label: 'Parsi' },
+  { value: 'Muslim', label: 'Muslim' },
+  { value: 'Any', label: 'Any' },
+];
+
+const courseOptions = [
+  { value: 'Engineering', label: 'Engineering' },
+  { value: 'Medical', label: 'Medical' },
+  { value: 'Management', label: 'Management' },
+  { value: 'Fellowship', label: 'Fellowship' },
+  { value: 'Sports', label: 'Sports' },
+];
+
+
+
 const ScholarshipForm = ({ scholarship, onSubmit }) => {
   const [formState, setFormState] = useState(
     scholarship || {
       name: "",
       deadline: "",
       amount: "",
-      categories: "",
-      gender: "",
-      religion: "",
-      course: "",
+      categories: [],
+      gender: [],
+      religion: [],
+      course: [],
+      link: "",
     }
   );
 
-  const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+  const handleChange = (selectedOptions, { name }) => {
+    setFormState({
+      ...formState,
+      [name]: selectedOptions ? selectedOptions.map(option => option.value) : [],
+    });
   };
 
   const handleSubmit = (e) => {
@@ -159,86 +251,84 @@ const ScholarshipForm = ({ scholarship, onSubmit }) => {
           type="text"
           name="name"
           value={formState.name}
-          onChange={handleChange}
+          onChange={(e) => setFormState({ ...formState, name: e.target.value })}
           className="w-full p-2 border rounded-lg"
           required
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-1">
         <label className="block text-sm font-semibold mb-1">Deadline</label>
         <input
           type="date"
           name="deadline"
           value={formState.deadline}
-          onChange={handleChange}
+          onChange={(e) => setFormState({ ...formState, deadline: e.target.value })}
           className="w-full p-2 border rounded-lg"
           required
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-1">
         <label className="block text-sm font-semibold mb-1">Amount</label>
         <input
           type="text"
           name="amount"
           value={formState.amount}
-          onChange={handleChange}
+          onChange={(e) => setFormState({ ...formState, amount: e.target.value })}
           className="w-full p-2 border rounded-lg"
           required
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-1">
         <label className="block text-sm font-semibold mb-1">Categories</label>
-        <select
+        <Select
           name="categories"
-          value={formState.categories}
+          options={categoryOptions}
+          isMulti
+          value={categoryOptions.filter(option => formState.categories.includes(option.value))}
           onChange={handleChange}
-          className="w-full p-2 border rounded-lg"
-          required
-        >
-          <option value="">Select...</option>
-          <option value="Open">Open</option>
-          <option value="Closed">Closed</option>
-          {/* Add more options as needed */}
-        </select>
+          className="w-full"
+        />
       </div>
-      <div className="mb-4">
+      <div className="mb-1">
         <label className="block text-sm font-semibold mb-1">Gender</label>
-        <select
+        <Select
           name="gender"
-          value={formState.gender}
+          options={genderOptions}
+          isMulti
+          value={genderOptions.filter(option => formState.gender.includes(option.value))}
           onChange={handleChange}
-          className="w-full p-2 border rounded-lg"
-          required
-        >
-          <option value="">Select...</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          {/* Add more options as needed */}
-        </select>
+          className="w-full"
+        />
       </div>
-      <div className="mb-4">
+      <div className="mb-1">
         <label className="block text-sm font-semibold mb-1">Religion</label>
-        <select
+        <Select
           name="religion"
-          value={formState.religion}
+          options={religionOptions}
+          isMulti
+          value={religionOptions.filter(option => formState.religion.includes(option.value))}
           onChange={handleChange}
-          className="w-full p-2 border rounded-lg"
-          required
-        >
-          <option value="">Select...</option>
-          <option value="Any">Any</option>
-          <option value="Christianity">Christianity</option>
-          <option value="Islam">Islam</option>
-          {/* Add more options as needed */}
-        </select>
+          className="w-full"
+        />
       </div>
-      <div className="mb-4">
+      <div className="mb-1">
         <label className="block text-sm font-semibold mb-1">Course</label>
-        <input
-          type="text"
+        <Select
           name="course"
-          value={formState.course}
+          options={courseOptions}
+          isMulti
+          value={courseOptions.filter(option => formState.course.includes(option.value))}
           onChange={handleChange}
+          className="w-full"
+        />
+      </div>
+      <div className="mb-1">
+      <label className="block text-sm font-semibold mb-1">Link</label>
+      <input
+          type="text"
+          name="link"
+          value={formState.link}
+          onChange={(e) => setFormState({ ...formState, link: e.target.value })}
           className="w-full p-2 border rounded-lg"
           required
         />

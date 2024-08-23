@@ -11,14 +11,30 @@ import Coursedetails from './pages/coursedetails.jsx';
 import Blogs from './components/admin/Blogs.jsx';
 import Responses from './components/admin/Responses.jsx';
 import Sidebar from './components/admin/adminsidebar.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ScholarshipTable from './components/admin/scholarship.jsx';
 import Scholarships from './components/admin/scholarship.jsx';
 import ScholarshipEnquiry from './components/admin/ScholarshipEnquiry.jsx';
-
+import { exampleUsage } from './firebase/Enquireform.js';
+import { addSampleColleges } from './firebase/College.js';
+import AccommodationAdmin from './components/admin/Accomodation.jsx';
 
 
 function App() {
+
+  // useEffect(() => {
+  //   console.log('App mounted');
+  //   const fetchData = async () => {
+  //     await addSampleColleges();
+  //   };
+  //   fetchData();
+
+  //   return () => {
+  //     console.log('App unmounted');
+  //   };
+  // }, []);
+
+
   const [selectedComponent, setSelectedComponent] = useState(null);
   const renderComponent = () => {
     switch (selectedComponent) {
@@ -29,9 +45,11 @@ function App() {
       case 'Responses':
         return <Responses />;
       case 'Scholarships':
-        return <Scholarships onSelect={setSelectedComponent}/>;
+        return <Scholarships />;
       case 'ScholarshipEnquiry':
         return <ScholarshipEnquiry />;
+      case 'AccommodationAdmin':
+        return <AccommodationAdmin />;
       default:
         return <Blogs/>;
     }

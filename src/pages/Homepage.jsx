@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navigation from "../components/Navigation.jsx";
 import star from '../images/start.png'
 import rectangle from '../images/rectangle.svg'
@@ -17,8 +17,10 @@ import Subscribe from "../components/subscribe.jsx";
 import MobileCollegeRanking from "../components/mobileCollegeRanking.jsx";
 import Collegetab from "../components/Colleges.jsx";
 import Hotels from "../components/hotels.jsx";
+import { exampleUsage } from "../firebase/Course.js";
 
 function Homepage() {
+  
     return (
         <>
             <Navigation />

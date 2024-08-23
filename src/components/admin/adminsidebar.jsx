@@ -36,17 +36,29 @@ const Sidebar = ({ onSelect }) => {
           <span className="flex-1">Scholarships</span>
         </button>
         <button
+          className={`flex items-center p-2 mx-4 rounded-md ${selected === 'ScholarshipEnquiry' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
+          onClick={() => handleSelect('ScholarshipEnquiry')}
+        >
+          <span className="flex-1">Scholarships Enquiry</span>
+        </button>
+        <button
+          className={`flex items-center p-2 mx-4 rounded-md ${selected === 'AccommodationAdmin' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
+          onClick={() => handleSelect('AccommodationAdmin')}
+        >
+          <span className="flex-1">Accommodation</span>
+        </button>
+        <button
           className={`flex items-center p-2 mx-4 rounded-md ${selected === 'Colleges' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
           onClick={() => handleSelect('Colleges')}
         >
           <span className="flex-1">Colleges</span>
         </button>
-        <button
+        {/* <button
           className={`flex items-center p-2 mx-4 rounded-md ${selected === 'Accommodations' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
           onClick={() => handleSelect('Accommodations')}
         >
           <span className="flex-1">Accommodations</span>
-        </button>
+        </button> */}
        
      
       
