@@ -104,8 +104,6 @@ function Homepage() {
             <LatestNews/>
             <BlogScreen />    
             <Subscribe/> 
-            <Collegetab/>
-            <Hotels/>
 
         </>
     );

@@ -10,7 +10,7 @@ function Collegetab()
         <div className="grid grid-cols-3 gap-4 justify-center">
             {data.map((item,index)=>(
                 
-                <div className="flex flex-col border-2 shadow-md rounded-md w-[450px] h-[356px] justify-center" key={index}>
+                <div className="flex bg-white flex-col border-2 shadow-md rounded-md w-[450px] h-[356px] justify-center" key={index}>
                            <div className="flex justify-center">
                                  <img src={item.image.src} alt={item.image.alt} className="w-[417px] h-[210px]"/>
                             </div>

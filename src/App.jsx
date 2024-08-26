@@ -18,6 +18,10 @@ import ScholarshipEnquiry from './components/admin/ScholarshipEnquiry.jsx';
 import { exampleUsage } from './firebase/Enquireform.js';
 import { addSampleColleges } from './firebase/College.js';
 import AccommodationAdmin from './components/admin/Accomodation.jsx';
+import Popularcareers from './pages/popularcareers.jsx';
+import Popularcolleges from './pages/popularcolleges.jsx';
+import Topcolleges from './pages/topcolleges.jsx';
+import Housing from './pages/housing.jsx';
 import Colleges from './components/admin/colleges.jsx';
 
 function App() {
@@ -62,9 +66,16 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/blog/:id" element={<BlogDetailScreen />} />
         <Route path="/scholarship" element={<ScholarshipScreen />} />
-        <Route path="/enquireform" element={<EnquireForm />} />
+        <Route path="/enquire" element={<EnquireForm />} />
         <Route path="/scholarshipform" element={<ScholarshipFormScreen />} />
         <Route path="/coursedetails" element={<Coursedetails />} />
+        <Route path="/careers" element={<Popularcareers />} />
+        <Route path="/collegeoptions" element={<Popularcolleges />} />
+        <Route path="/colleges" element={<Topcolleges />} />
+        <Route path="/housing" element={<Housing />} />
+
+
+
         <Route path="/admin" element={
             <div className="flex ">
               <Sidebar onSelect={setSelectedComponent} />
