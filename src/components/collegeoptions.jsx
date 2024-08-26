@@ -1,7 +1,7 @@
 import React from "react";
 import courseData from "../jsondata/courses.js";
 
-function Courses() {
+function Collegeoptions() {
   return (
     <>
       <div className="flex justify-center items-center  w-full mt-6">
@@ -31,4 +31,4 @@ function Courses() {
   );
 }
 
-export default Courses;
+export default Collegeoptions;

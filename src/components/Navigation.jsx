@@ -23,7 +23,7 @@ function Navigation() {
                         <a href="/colleges" className='Colleges'>
                             <p>Colleges</p>
                         </a>
-                        <a href="/find-scholarship" className='Find-scholarship'>
+                        <a href="/scholarship" className='Find-scholarship'>
                             <p>Find scholarship</p>
                         </a>
                         <a href="/housing" className='Housing'>

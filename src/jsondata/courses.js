@@ -1,51 +1,86 @@
-
-import computer from '../images/computer.png'
-import design from '../images/DESIGN.png'
-import medical from '../images/medical.png'
-import science from '../images/science.png'
-import air from '../images/air.png'
+import engineering from '../images/engineering.png';
+import management from '../images/management.png';
+import commerce from '../images/commerce.png';
+import medical from '../images/medical.png';
+import sciences from '../images/sciences.png';
+import informationTechnology from '../images/informationTechnology.png';
+import artsHumanities from '../images/artsHumanities.png';
+import design from '../images/design.png';
+import aerospaceAviation from '../images/aerospaceAviation.png';
 
 const courseData = {
   "data": [
     {
       "image": {
-        "src": computer,
-        "alt": "Course 1 Image"
+        "src": engineering,
+        "alt": "Engineering Image"
       },
-      "course": "Computer Science",
-      "numberOfColleges": 120
+      "course": "Engineering",
+      "numberOfColleges": 34
     },
     {
       "image": {
-        "src": design,
-        "alt": "Course 2 Image"
+        "src": management,
+        "alt": "Management Image"
       },
-      "course": "Design",
-      "numberOfColleges": 85
+      "course": "Management",
+      "numberOfColleges": 34
+    },
+    {
+      "image": {
+        "src": commerce,
+        "alt": "Commerce Image"
+      },
+      "course": "Commerce",
+      "numberOfColleges": 34
     },
     {
       "image": {
         "src": medical,
-        "alt": "Course 3 Image"
+        "alt": "Medical Image"
       },
       "course": "Medical",
-      "numberOfColleges": 95
+      "numberOfColleges": 34
     },
     {
       "image": {
-        "src": science,
-        "alt": "Course 4 Image"
+        "src": sciences,
+        "alt": "Sciences Image"
       },
-      "course": "Science",
-      "numberOfColleges": 50
+      "course": "Sciences",
+      "numberOfColleges": 34
     },
     {
       "image": {
-        "src": air,
-        "alt": "Course 5 Image"
+        "src": informationTechnology,
+        "alt": "Information Technology Image"
       },
-      "course": "Aviation",
-      "numberOfColleges": 30
+      "course": "Information Technology",
+      "numberOfColleges": 34
+    },
+    {
+      "image": {
+        "src": artsHumanities,
+        "alt": "Arts & Humanities Image"
+      },
+      "course": "Arts & Humanities",
+      "numberOfColleges": 34
+    },
+    {
+      "image": {
+        "src": design,
+        "alt": "Design Image"
+      },
+      "course": "Design",
+      "numberOfColleges": 34
+    },
+    {
+      "image": {
+        "src": aerospaceAviation,
+        "alt": "Aerospace & Aviation Image"
+      },
+      "course": "Aerospace & Aviation",
+      "numberOfColleges": 34
     }
   ]
 };
