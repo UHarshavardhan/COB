@@ -18,7 +18,7 @@ import ScholarshipEnquiry from './components/admin/ScholarshipEnquiry.jsx';
 import { exampleUsage } from './firebase/Enquireform.js';
 import { addSampleColleges } from './firebase/College.js';
 import AccommodationAdmin from './components/admin/Accomodation.jsx';
-
+import Colleges from './components/admin/colleges.jsx';
 
 function App() {
 
@@ -50,6 +50,8 @@ function App() {
         return <ScholarshipEnquiry />;
       case 'AccommodationAdmin':
         return <AccommodationAdmin />;
+      case 'Colleges':
+       return <Colleges/>
       default:
         return <Blogs/>;
     }
@@ -65,8 +67,7 @@ function App() {
         <Route path="/coursedetails" element={<Coursedetails />} />
         <Route path="/admin" element={
             <div className="flex ">
-              <Side
-              bar onSelect={setSelectedComponent} />
+              <Sidebar onSelect={setSelectedComponent} />
               <div className="flex-1 bg-[#fdf1e2]  justify-center items-center p-4">
                 {renderComponent()}
               </div>
