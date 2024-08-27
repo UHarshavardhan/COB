@@ -5,7 +5,7 @@ import medical from '../images/medical.png';
 import sciences from '../images/sciences.png';
 import informationTechnology from '../images/informationTechnology.png';
 import artsHumanities from '../images/artsHumanities.png';
-import design from '../images/design.png';
+import design from '../images/DESIGN.png'
 import aerospaceAviation from '../images/aerospaceAviation.png';
 
 const courseData = {

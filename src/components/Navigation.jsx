@@ -17,16 +17,16 @@ function Navigation() {
                 </div>
                 <div className='hidden md:flex flex-grow flex'>
                     <div className='flex flex-row gap-16 font-serif'>
-                        <a href="/careers" className='Careers'>
+                        <a href="/careers" className='Careers font-pop'>
                             <p>Careers</p>
                         </a>
-                        <a href="/colleges" className='Colleges'>
+                        <a href="/colleges" className='Colleges font-pop'>
                             <p>Colleges</p>
                         </a>
-                        <a href="/scholarship" className='Find-scholarship'>
+                        <a href="/scholarship" className='Find-scholarship font-pop'>
                             <p>Find scholarship</p>
                         </a>
-                        <a href="/housing" className='Housing'>
+                        <a href="/housing" className='Housing font-pop'>
                             <p>Housing</p>
                         </a>
                     </div>
@@ -38,7 +38,7 @@ function Navigation() {
                         </a>
                         <PiLineVerticalThin size={34} />
                         <a href="/enquire" className='Enquire'>
-                            <button className='bg-indigo-800 text-white h-12 w-44 rounded-xl'>Enquire Now</button>
+                            <button className='bg-indigo-800 text-white h-12 w-44 rounded-xl font-pop font-bold'>Enquire Now</button>
                         </a>
                     </div>
                 </div>

@@ -49,9 +49,9 @@ const CollegeRanking = () => {
 
   return (
     <div className=" lg:mx-[10%] mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Top 10 Colleges</h1>
+      <h1 className="text-[64px] mb-6 font-pop text-[#2E3192] font-semibold">Top 10 Colleges</h1>
 
-      {/* Category Selection */}
+      
       <div className="flex justify-between overflow-x-auto mb-6">
         {categories.map((category, index) => (
           <button

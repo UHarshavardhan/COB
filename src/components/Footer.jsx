@@ -5,7 +5,7 @@ import { faFacebookF, faInstagram, faLinkedinIn, faYoutube } from '@fortawesome/
 
 const Footer = () => {
   return (
-    <footer className="bg-white py-10 px-6">
+    <footer className="bg-white py-10 px-6 mt-5">
       <div className="lg:mx-[10%] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Logo and Description */}
         <div className="space-y-4">
@@ -55,6 +55,11 @@ const Footer = () => {
 
         </div>
       </div>
+
+      <div className="mt-36">
+  <hr className="border-1 border-black" />
+</div>
+
     </footer>
   );
 };

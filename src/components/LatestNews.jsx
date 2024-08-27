@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import curve from '../images/curve.png'
 
 const colours = ['white'];
 
@@ -57,9 +58,9 @@ const LatestNews = () => {
   const selectedBlogs = blogs.slice(startIndex, startIndex + PAGE_SIZE);
 
   return (
-    <div id="blogs" className="flex bg-gradient-to-b from-purple-300 to-purple-100 py-10 px-6 flex-col items-center justify-center py-8">
-      <h1 className="text-3xl lg:text-5xl font-bold mb-4 text-center lg:text-left text-blue-600">Latest News</h1>
-      <p className="mb-8 text-center lg:text-xl text-gray-600">Catch the Latest Career & Education-Related Headlines! 
+    <div id="blogs" className="flex bg-gradient-to-b from-purple-300 to-purple-100  flex-col  justify-center  max-w-fit  ">
+      <h1 className="text-3xl lg:text-5xl font-bold mb-4 text-left text-[#2E3192] mt-10 font-pop">Latest News</h1>
+      <p className="mb-8 text-left lg:text-xl text-[#6E7C91] font-pop">Catch the Latest Career & Education-Related Headlines! <br/>
       We deliver up-to-the-minute happenings in the job market and exciting career opportunities</p>
       
       {/* Mobile View */}
@@ -87,7 +88,7 @@ const LatestNews = () => {
       </div>
 
       {/* Desktop View */}
-      <div className="hidden md:block w-full px-8">
+      <div className="hidden md:block h-[500px] px-8">
         <div className="flex flex-wrap justify-center mx-[3%] gap-8">
           {selectedBlogs.map((blog, index) => (
             <div
@@ -111,7 +112,7 @@ const LatestNews = () => {
           ))}
         </div>
         <div className="flex items-center space-x-4 mt-8 justify-center">
-          <button
+          {/* <button
             onClick={handlePreviousPage}
             className={`p-2 rounded-full ${currentPage === 0 ? 'opacity-50 cursor-not-allowed' : 'bg-gray-200'}`}
             disabled={currentPage === 0}
@@ -125,10 +126,16 @@ const LatestNews = () => {
             disabled={currentPage === totalPages - 1}
           >
             &gt;
-          </button>
+          </button> */}
+          
         </div>
+        
       </div>
+      <div clas>
+          <img src={curve} className='w-[1906px] h-[190px] max-w-full'/>
+        </div>
     </div>
+    
   );
 };
 export default LatestNews;
