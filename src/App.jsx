@@ -23,6 +23,7 @@ import Popularcolleges from './pages/popularcolleges.jsx';
 import Topcolleges from './pages/topcolleges.jsx';
 import Housing from './pages/housing.jsx';
 import Colleges from './components/admin/colleges.jsx';
+import Courses from './components/admin/courses.jsx';
 
 function App() {
 
@@ -56,6 +57,8 @@ function App() {
         return <AccommodationAdmin />;
       case 'Colleges':
        return <Colleges/>
+      case 'Courses':
+        return <Courses/>;
       default:
         return <Blogs/>;
     }

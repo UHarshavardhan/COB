@@ -53,6 +53,12 @@ const Sidebar = ({ onSelect }) => {
         >
           <span className="flex-1">Colleges</span>
         </button>
+        <button
+          className={`flex items-center p-2 mx-4 rounded-md ${selected === 'Courses' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
+          onClick={() => handleSelect('Courses')}
+        >
+          <span className="flex-1">Courses</span>
+        </button>
         {/* <button
           className={`flex items-center p-2 mx-4 rounded-md ${selected === 'Accommodations' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
           onClick={() => handleSelect('Accommodations')}

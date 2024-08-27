@@ -59,6 +59,21 @@ const deleteCourse = async (courseId) => {
   }
 };
 
+//get all courses
+const getAllCourses = async () => {
+  try {
+    const snapshot = await db.collection(collectionName).get();
+    const courses = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return courses;
+  } catch (error) {
+    console.error('Error fetching courses:', error);
+    return [];
+  }
+};
+
 const exampleUsage = async () => {
     console.log('exampleUsage called'); // Debugging line
     const courseData = {
@@ -88,5 +103,6 @@ const exampleUsage = async () => {
     readCourse,
     updateCourse,
     deleteCourse,
-    exampleUsage
+    exampleUsage,
+    getAllCourses
   };

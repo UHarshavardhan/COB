@@ -25,6 +25,8 @@ export const getAllColleges = async () => {
       id: doc.id,
       ...doc.data(),
     }));
+    //sort basef on createat
+    colleges.sort((a, b) => b.createdAt - a.createdAt);
     return colleges;
   } catch (error) {
     console.error('Error fetching colleges:', error);
