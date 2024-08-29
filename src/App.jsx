@@ -24,6 +24,8 @@ import Topcolleges from './pages/topcolleges.jsx';
 import Housing from './pages/housing.jsx';
 import Colleges from './components/admin/colleges.jsx';
 import Courses from './components/admin/courses.jsx';
+import News from './components/admin/news.jsx';
+import NewsDetailScreen from './pages/newsFullScreen.jsx';
 
 function App() {
 
@@ -40,7 +42,7 @@ function App() {
   // }, []);
 
 
-  const [selectedComponent, setSelectedComponent] = useState(null);
+  const [selectedComponent, setSelectedComponent] = useState('Scholarships');
   const renderComponent = () => {
     switch (selectedComponent) {
       case 'AdminPanel':
@@ -59,6 +61,10 @@ function App() {
        return <Colleges/>
       case 'Courses':
         return <Courses/>;
+      case 'blog':
+        return <Blogs/>;
+      case 'News':
+        return <News/>;
       default:
         return <Blogs/>;
     }
@@ -68,6 +74,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/blog/:id" element={<BlogDetailScreen />} />
+        <Route path="/news/:id" element={<NewsDetailScreen />} />
+
+
         <Route path="/scholarship" element={<ScholarshipScreen />} />
         <Route path="/enquire" element={<EnquireForm />} />
         <Route path="/scholarshipform" element={<ScholarshipFormScreen />} />

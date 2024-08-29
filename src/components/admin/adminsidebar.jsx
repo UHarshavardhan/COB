@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from './../../images/logo.png';
 
 const Sidebar = ({ onSelect }) => {
-  const [selected, setSelected] = useState('Courses');
+  const [selected, setSelected] = useState('Scholarships');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,6 +59,21 @@ const Sidebar = ({ onSelect }) => {
         >
           <span className="flex-1">Courses</span>
         </button>
+        <button
+          className={`flex items-center p-2 mx-4 rounded-md ${selected === 'Blog' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
+          onClick={() => handleSelect('Blog')}
+        >
+          <span className="flex-1">Blog</span>
+        </button>
+
+        <button
+          className={`flex items-center p-2 mx-4 rounded-md ${selected === 'News' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
+          onClick={() => handleSelect('News')}
+        >
+          <span className="flex-1">News</span>
+        </button>
+        
+
         {/* <button
           className={`flex items-center p-2 mx-4 rounded-md ${selected === 'Accommodations' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
           onClick={() => handleSelect('Accommodations')}
