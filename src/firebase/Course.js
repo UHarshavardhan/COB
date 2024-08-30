@@ -28,7 +28,7 @@ const readCourse = async (courseId) => {
     const docRef = db.collection(collectionName).doc(courseId);
     const doc = await docRef.get();
     if (doc.exists) {
-      console.log('Course data:', doc.data());
+      return { id: doc.id, ...doc.data() };
     } else {
       console.log('No such course!');
     }

@@ -34,6 +34,18 @@ export const getAllColleges = async () => {
   }
 };
 
+// Fetch unique categories from the database
+export const getCategories = async () => {
+  try {
+    const snapshot = await db.collection('colleges').get();
+    const categories = new Set(snapshot.docs.map(doc => doc.data().category));
+    return Array.from(categories);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+};
+
 // Get a single college by ID
 export const getCollegeById = async (id) => {
   try {

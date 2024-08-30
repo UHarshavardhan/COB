@@ -26,6 +26,10 @@ import Colleges from './components/admin/colleges.jsx';
 import Courses from './components/admin/courses.jsx';
 import News from './components/admin/news.jsx';
 import NewsDetailScreen from './pages/newsFullScreen.jsx';
+import Collegedetails from './pages/Collegedetails.jsx';
+import Login from './pages/login.jsx';
+import SubCourses from './components/subcourses.jsx';
+import Scholarship_Screen from './pages/scholarshipscreen.jsx';
 
 function App() {
 
@@ -78,12 +82,16 @@ function App() {
 
 
         <Route path="/scholarship" element={<ScholarshipScreen />} />
+        <Route path="/scholarship/:id" element={<Scholarship_Screen />} />
         <Route path="/enquire" element={<EnquireForm />} />
         <Route path="/scholarshipform" element={<ScholarshipFormScreen />} />
         <Route path="/coursedetails" element={<Coursedetails />} />
         <Route path="/careers" element={<Popularcareers />} />
+        <Route path="/courses/:category" element={<SubCourses />} />
         <Route path="/collegeoptions" element={<Popularcolleges />} />
-        <Route path="/colleges" element={<Topcolleges />} />
+        <Route path="/colleges/:category" element={<Topcolleges />} />
+        <Route path="/college/:id" element={<Collegedetails />} />
+        <Route path="/course/:id" element={<Coursedetails />} />
         <Route path="/housing" element={<Housing />} />
 
 
@@ -100,7 +108,7 @@ function App() {
 
 
         {/* Uncomment and ensure these components exist for the following routes to work */}
-        {/* <Route path="/login" element={<LoginPage />} /> */}
+        <Route path="/login" element={<Login />} />
         {/* <Route path="/signup" element={<SignUpPage />} /> */}
       </Routes>
       <Footer />

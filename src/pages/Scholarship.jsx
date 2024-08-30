@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import { getAllScholarships } from './../firebase/Scholarships';
 import ScholarshipHeader from '../components/ScholarshipHeader';
 
@@ -10,8 +11,6 @@ const filtersData = {
   religion: ['Buddhism', 'Christian', 'Hindu', 'Jain', 'Sikh', 'Parsi', 'Muslim', 'Any'],
   course: ['Engineering', 'Medical', 'Management', 'Fellowship', 'Sports'],
 };
-
-
 
 const FilterUI = ({ filters, handleFilterChange, resetFilters }) => {
   const [collapsedSections, setCollapsedSections] = useState({});
@@ -61,7 +60,7 @@ const FilterUI = ({ filters, handleFilterChange, resetFilters }) => {
           )}
         </div>
       ))}
-      <button  className="w-full bg-blue-500 text-white px-4 py-2 rounded mt-4">
+      <button className="w-full bg-blue-500 text-white px-4 py-2 rounded mt-4">
         Apply
       </button>
     </div>
@@ -78,14 +77,15 @@ const ScholarshipList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [scholarships, setScholarships] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchScholarships = async () => {
       setLoading(true);
       try {
         const querySnapshot = await getAllScholarships();
-        console.log(querySnapshot)
-        setScholarships( querySnapshot);
+        console.log(querySnapshot);
+        setScholarships(querySnapshot);
       } catch (error) {
         console.error('Error fetching scholarships: ', error);
       } finally {
@@ -136,6 +136,10 @@ const ScholarshipList = () => {
     currentPage * itemsPerPage
   );
 
+  const handleView = (id) => {
+    navigate(`/scholarship/${id}`);
+  };
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-6 sm:space-y-0 mb-6">
@@ -168,10 +172,16 @@ const ScholarshipList = () => {
                       <td className="py-2">{scholarship.name}</td>
                       <td className="py-2">{scholarship.deadline}</td>
                       <td className="py-2">{scholarship.amount}</td>
-                      <td className="py-2">
-                      <a href={scholarship.link} target="_blank"  className="bg-blue-500 text-white px-4 py-2 rounded">
-                        Apply now
-                      </a>
+                      <td className="py-2 flex space-x-2">
+                        <a href={scholarship.link} target="_blank" className="bg-blue-500 text-white px-4 py-2 rounded">
+                          Apply now
+                        </a>
+                        <button
+                          onClick={() => handleView(scholarship.id)}
+                          className="bg-green-500 text-white px-4 py-2 rounded"
+                        >
+                          View
+                        </button>
                       </td>
                     </tr>
                   ))}

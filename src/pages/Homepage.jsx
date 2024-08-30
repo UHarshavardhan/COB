@@ -18,6 +18,7 @@ import MobileCollegeRanking from "../components/mobileCollegeRanking.jsx";
 import Collegetab from "../components/Colleges.jsx";
 import Hotels from "../components/hotels.jsx";
 import { exampleUsage } from "../firebase/Course.js";
+import Carrers from "../components/carrers.jsx";
 
 function Homepage() {
   
@@ -97,6 +98,17 @@ function Homepage() {
 z
 
             <Courses/>
+            <div className="college-options flex flex-col items-center mt-28 px-4">
+                    <div style={{ background: "#2E319273" }} className="college w-full max-w-xs h-12 rounded-md flex justify-center items-center">
+                    <span className="text-white text-center font-pop">
+                        Carrers
+                    </span>
+                    </div>
+                    <div className="college-heading mt-7 text-[#2E3192] text-3xl md:text-4xl lg:text-[48px] font-pop">
+                   <span className="font-pop font-semibold"> The finest Options are Here!</span>
+                    </div>
+                </div>
+            <Carrers/>
             <div className="lg:block hidden mt-6"><CollegeRanking/></div>
             <div className="block lg:hidden"><MobileCollegeRanking /></div>
             <div className="lg:block hidden"><Aboutus/></div>

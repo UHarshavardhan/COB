@@ -157,7 +157,7 @@ const Scholarships = () => {
 
       {/* Add Popup */}
       {isAddOpen && (
-        <Popup title="Add Scholarship" onClose={() => setIsAddOpen(false)}>
+        <Popup title="Add Scholarship "  onClose={() => setIsAddOpen(false)}>
           <ScholarshipForm onSubmit={handleAdd} />
         </Popup>
       )}
@@ -175,7 +175,7 @@ const Scholarships = () => {
 // Popup Component
 const Popup = ({ title, children, onClose }) => (
   <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-    <div className="bg-white rounded-lg p-6 w-96">
+    <div className="bg-white rounded-lg p-6 w-[80%]">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">{title}</h2>
         <button onClick={onClose}>&times;</button>
@@ -228,6 +228,12 @@ const ScholarshipForm = ({ scholarship, onSubmit }) => {
       religion: [],
       course: [],
       link: "",
+      about: "",
+      overview: "",
+      benefits: "",
+      renewalPolicy: "",
+      eligibility: "",
+      documentsRequired: "",
     }
   );
 
@@ -238,6 +244,13 @@ const ScholarshipForm = ({ scholarship, onSubmit }) => {
     });
   };
 
+  const handleInputChange = (e) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formState);
@@ -245,99 +258,168 @@ const ScholarshipForm = ({ scholarship, onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-1">Name</label>
-        <input
-          type="text"
-          name="name"
-          value={formState.name}
-          onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-          className="w-full p-2 border rounded-lg"
-          required
-        />
+      <div className="grid grid-cols-3 w-full gap-4 mb-4">
+        {/* Existing Fields */}
+        <div className="col-span-2">
+          <label className="block text-sm font-semibold mb-1">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formState.name}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            required
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Deadline</label>
+          <input
+            type="date"
+            name="deadline"
+            value={formState.deadline}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            required
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Amount</label>
+          <input
+            type="text"
+            name="amount"
+            value={formState.amount}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            required
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Categories</label>
+          <Select
+            name="categories"
+            options={categoryOptions}
+            isMulti
+            value={categoryOptions.filter(option => formState.categories.includes(option.value))}
+            onChange={handleChange}
+            className="w-full"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Gender</label>
+          <Select
+            name="gender"
+            options={genderOptions}
+            isMulti
+            value={genderOptions.filter(option => formState.gender.includes(option.value))}
+            onChange={handleChange}
+            className="w-full"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Religion</label>
+          <Select
+            name="religion"
+            options={religionOptions}
+            isMulti
+            value={religionOptions.filter(option => formState.religion.includes(option.value))}
+            onChange={handleChange}
+            className="w-full"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Course</label>
+          <Select
+            name="course"
+            options={courseOptions}
+            isMulti
+            value={courseOptions.filter(option => formState.course.includes(option.value))}
+            onChange={handleChange}
+            className="w-full"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Link</label>
+          <input
+            type="text"
+            name="link"
+            value={formState.link}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            required
+          />
+        </div>
+
+        {/* New Fields */}
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">About Scholarship</label>
+          <textarea
+            name="about"
+            value={formState.about}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            rows="4"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Overview</label>
+          <textarea
+            name="overview"
+            value={formState.overview}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            rows="4"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Benefits</label>
+          <textarea
+            name="benefits"
+            value={formState.benefits}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            rows="4"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Renewal Policy</label>
+          <textarea
+            name="renewalPolicy"
+            value={formState.renewalPolicy}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            rows="4"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Eligibility</label>
+          <textarea
+            name="eligibility"
+            value={formState.eligibility}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            rows="4"
+          />
+        </div>
+        <div className="col-span-1">
+          <label className="block text-sm font-semibold mb-1">Documents Required</label>
+          <textarea
+            name="documentsRequired"
+            value={formState.documentsRequired}
+            onChange={handleInputChange}
+            className="w-full p-2 border rounded-lg"
+            rows="4"
+          />
+        </div>
+
+        <div className="col-span-1">
+          <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">
+            Submit
+          </button>
+        </div>
       </div>
-      <div className="mb-1">
-        <label className="block text-sm font-semibold mb-1">Deadline</label>
-        <input
-          type="date"
-          name="deadline"
-          value={formState.deadline}
-          onChange={(e) => setFormState({ ...formState, deadline: e.target.value })}
-          className="w-full p-2 border rounded-lg"
-          required
-        />
-      </div>
-      <div className="mb-1">
-        <label className="block text-sm font-semibold mb-1">Amount</label>
-        <input
-          type="text"
-          name="amount"
-          value={formState.amount}
-          onChange={(e) => setFormState({ ...formState, amount: e.target.value })}
-          className="w-full p-2 border rounded-lg"
-          required
-        />
-      </div>
-      <div className="mb-1">
-        <label className="block text-sm font-semibold mb-1">Categories</label>
-        <Select
-          name="categories"
-          options={categoryOptions}
-          isMulti
-          value={categoryOptions.filter(option => formState.categories.includes(option.value))}
-          onChange={handleChange}
-          className="w-full"
-        />
-      </div>
-      <div className="mb-1">
-        <label className="block text-sm font-semibold mb-1">Gender</label>
-        <Select
-          name="gender"
-          options={genderOptions}
-          isMulti
-          value={genderOptions.filter(option => formState.gender.includes(option.value))}
-          onChange={handleChange}
-          className="w-full"
-        />
-      </div>
-      <div className="mb-1">
-        <label className="block text-sm font-semibold mb-1">Religion</label>
-        <Select
-          name="religion"
-          options={religionOptions}
-          isMulti
-          value={religionOptions.filter(option => formState.religion.includes(option.value))}
-          onChange={handleChange}
-          className="w-full"
-        />
-      </div>
-      <div className="mb-1">
-        <label className="block text-sm font-semibold mb-1">Course</label>
-        <Select
-          name="course"
-          options={courseOptions}
-          isMulti
-          value={courseOptions.filter(option => formState.course.includes(option.value))}
-          onChange={handleChange}
-          className="w-full"
-        />
-      </div>
-      <div className="mb-1">
-      <label className="block text-sm font-semibold mb-1">Link</label>
-      <input
-          type="text"
-          name="link"
-          value={formState.link}
-          onChange={(e) => setFormState({ ...formState, link: e.target.value })}
-          className="w-full p-2 border rounded-lg"
-          required
-        />
-      </div>
-      <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">
-        Submit
-      </button>
     </form>
   );
 };
+
 
 export default Scholarships;
