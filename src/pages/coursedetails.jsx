@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ScholarshipHeader from '../components/ScholarshipHeader';
+import { createEnquiry } from '../firebase/course_Enquireform'; // Import createEnquiry function
+
 import { readCourse } from '../firebase/Course'; // Import your readCourse function
 
 const Coursedetails = () => {
@@ -10,6 +12,14 @@ const Coursedetails = () => {
   const [moreOption, setMoreOption] = useState(null);
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
+  const [enquiry, setEnquiry] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    course: '',
+    message: '',
+  });
+
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -26,7 +36,33 @@ const Coursedetails = () => {
 
     fetchCourse();
   }, [id]);
+  const handleChange = (e) => {
+    setEnquiry({
+      ...enquiry,
+      [e.target.name]: e.target.value,
+    });
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const enquiryData = {
+        ...enquiry,
+      };
+      await createEnquiry(enquiryData);
+      alert('Enquiry submitted successfully!');
+      setEnquiry({
+        name: '',
+        email: '',
+        phone: '',
+        course: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Error submitting enquiry:', error);
+      alert('Failed to submit enquiry');
+    }
+  };
   const renderContent = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -184,50 +220,65 @@ const Coursedetails = () => {
           <div className="lg:w-2/5 lg:pl-6 w-full mt-6 lg:mt-0">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold mb-4">Let's Get Connected</h2>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="Name"
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={enquiry.name}
+                    onChange={handleChange}
+                    placeholder="Name" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
                 <div className="mb-4">
-                  <input
-                    type="email"
-                    placeholder="Email address"
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={enquiry.email}
+                    onChange={handleChange}
+                    placeholder="Email address" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
                 <div className="mb-4">
-                  <input
-                    type="tel"
-                    placeholder="IN +91 Enter your phone number"
+                  <input 
+                    type="tel" 
+                    name="phone"
+                    value={enquiry.phone}
+                    onChange={handleChange}
+                    placeholder="IN +91 Enter your phone number" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
                 <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="Course"
+                  <input 
+                    type="text" 
+                    name="course"
+                    value={enquiry.course}
+                    onChange={handleChange}
+                    placeholder="Course" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
                 <div className="mb-4">
-                  <textarea
-                    placeholder="Message"
+                  <textarea 
+                    name="message"
+                    value={enquiry.message}
+                    onChange={handleChange}
+                    placeholder="Message" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   ></textarea>
                 </div>
                 <div className="mb-4 flex items-center">
-                  <input
-                    type="checkbox"
+                  <input 
+                    type="checkbox" 
                     className="mr-2"
                   />
                   <label>I'm not a robot</label>
                 </div>
-                <button
-                  type="submit"
+                <button 
+                  type="submit" 
                   className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
                 >
                   Submit
@@ -237,15 +288,7 @@ const Coursedetails = () => {
 
             {/* Social Icons */}
             <div className="mt-4 flex justify-center space-x-6">
-              <a href="#" className="text-blue-600">
-                <i className="fab fa-facebook"></i>
-              </a>
-              <a href="#" className="text-pink-600">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="#" className="text-blue-700">
-                <i className="fab fa-linkedin"></i>
-              </a>
+              {/* Social Media Icons... */}
             </div>
           </div>
         </div>

@@ -30,6 +30,9 @@ import Collegedetails from './pages/Collegedetails.jsx';
 import Login from './pages/login.jsx';
 import SubCourses from './components/subcourses.jsx';
 import Scholarship_Screen from './pages/scholarshipscreen.jsx';
+import CollegeEnquireFormComponent from './components/admin/CollegeEnquireFormComponent.jsx';
+import CourseEnquireFormComponent from './components/admin/CourseEnquireFormComponent.jsx';
+
 
 function App() {
 
@@ -69,6 +72,10 @@ function App() {
         return <Blogs/>;
       case 'News':
         return <News/>;
+      case 'CollegeEnquiry':
+        return   <CollegeEnquireFormComponent />
+      case 'CourseEnquiry':
+        return   <CourseEnquireFormComponent />
       default:
         return <Blogs/>;
     }
@@ -81,7 +88,7 @@ function App() {
         <Route path="/news/:id" element={<NewsDetailScreen />} />
 
 
-        <Route path="/scholarship" element={<ScholarshipScreen />} />
+        <Route path="/find-scholarship" element={<ScholarshipScreen />} />
         <Route path="/scholarship/:id" element={<Scholarship_Screen />} />
         <Route path="/enquire" element={<EnquireForm />} />
         <Route path="/scholarshipform" element={<ScholarshipFormScreen />} />

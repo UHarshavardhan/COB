@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCollegeById } from '../firebase/College';
+import { createEnquiry } from '../firebase/college_Enquireform'; // Import createEnquiry function
 import ScholarshipHeader from '../components/ScholarshipHeader';
 
 const Collegedetails = () => {
   const { id } = useParams(); // Get the college ID from the URL
   const [college, setCollege] = useState(null);
   const [activeTab, setActiveTab] = useState('about');
-  const [moreOption, setMoreOption] = useState(null);
+  const [enquiry, setEnquiry] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    course: '',
+    message: '',
+  });
 
   useEffect(() => {
     const fetchCollege = async () => {
@@ -23,20 +30,46 @@ const Collegedetails = () => {
     fetchCollege();
   }, [id]);
 
+  const handleChange = (e) => {
+    setEnquiry({
+      ...enquiry,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const enquiryData = {
+        ...enquiry,
+        collegeName: college.name,
+      };
+      await createEnquiry(enquiryData);
+      alert('Enquiry submitted successfully!');
+      setEnquiry({
+        name: '',
+        email: '',
+        phone: '',
+        course: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Error submitting enquiry:', error);
+      alert('Failed to submit enquiry');
+    }
+  };
+
   const renderContent = () => {
     if (!college) return null;
 
     switch (activeTab) {
-        case 'about':
-            return (
-              <div>
-                <h2 className="text-xl font-semibold mb-2">About</h2>
-                {/* Use a div with white-space: pre-line to preserve spaces and new lines */}
-                <div className="text-gray-700 whitespace-pre-line">
-                  {college.overview}
-                </div>
-              </div>
-            );
+      case 'about':
+        return (
+          <div>
+            <h2 className="text-xl font-semibold mb-2">About</h2>
+            <div className="text-gray-700 whitespace-pre-line">{college.overview}</div>
+          </div>
+        );
           
       case 'highlights':
         return (
@@ -171,10 +204,13 @@ const Collegedetails = () => {
           <div className="lg:w-2/5 lg:pl-6 w-full mt-6 lg:mt-0">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold mb-4">Let's Get Connected</h2>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <input 
                     type="text" 
+                    name="name"
+                    value={enquiry.name}
+                    onChange={handleChange}
                     placeholder="Name" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
@@ -182,6 +218,9 @@ const Collegedetails = () => {
                 <div className="mb-4">
                   <input 
                     type="email" 
+                    name="email"
+                    value={enquiry.email}
+                    onChange={handleChange}
                     placeholder="Email address" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
@@ -189,6 +228,9 @@ const Collegedetails = () => {
                 <div className="mb-4">
                   <input 
                     type="tel" 
+                    name="phone"
+                    value={enquiry.phone}
+                    onChange={handleChange}
                     placeholder="IN +91 Enter your phone number" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
@@ -196,12 +238,18 @@ const Collegedetails = () => {
                 <div className="mb-4">
                   <input 
                     type="text" 
+                    name="course"
+                    value={enquiry.course}
+                    onChange={handleChange}
                     placeholder="Course" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
                 <div className="mb-4">
                   <textarea 
+                    name="message"
+                    value={enquiry.message}
+                    onChange={handleChange}
                     placeholder="Message" 
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   ></textarea>
@@ -224,15 +272,7 @@ const Collegedetails = () => {
 
             {/* Social Icons */}
             <div className="mt-4 flex justify-center space-x-6">
-              <a href="#" className="text-blue-600">
-                <i className="fab fa-facebook"></i>
-              </a>
-              <a href="#" className="text-pink-600">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="#" className="text-blue-700">
-                <i className="fab fa-linkedin"></i>
-              </a>
+              {/* Social Media Icons... */}
             </div>
           </div>
         </div>
