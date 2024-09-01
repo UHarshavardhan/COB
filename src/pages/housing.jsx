@@ -13,7 +13,7 @@ function Housing() {
         title="Find Student Accommodation,That Best Suits You" 
         subtitle="On a Budget or something with a view? We've got you! "
       />
-      <div className='lg:mt-[-80px] lg:mx-[3%]'>
+      <div className='lg:mx-[3%] lg:mt-9'>
       <Hotels/>
 
 

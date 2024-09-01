@@ -155,16 +155,25 @@ const ScholarshipList = () => {
             <p>Loading...</p>
           ) : (
             <>
-              <table className="w-full">
-                <thead>
-                  <tr>
-                    <th className="text-left py-2">Sr no.</th>
+            <div className='flex flex-col'>
+             <div className='flex flex-row bg-white rounded-md shadow-[6px_6px_12px_6px_rgba(0,0,0,0)] border shadow-gray-100 cursor-pointer h-[55px] items-center'>
+              <p className='ml-5'>Sr no</p>
+              <p className='ml-[110px]'>Scholarship</p>
+              <p className='ml-[180px]'>Deadline</p>
+              <p className='ml-[100px]'>Amount</p>
+
+             </div>
+            
+              <table className="w-full mt-3 ml-5">
+                {/* <thead>
+                  <tr >
+                    <th className="text-left py-2 ">Sr no.</th>
                     <th className="text-left py-2">Scholarship</th>
                     <th className="text-left py-2">Deadline</th>
                     <th className="text-left py-2">Amount</th>
                     <th></th>
                   </tr>
-                </thead>
+                </thead> */}
                 <tbody>
                   {paginatedScholarships.map((scholarship, index) => (
                     <tr key={scholarship.id} className="border-b">
@@ -172,15 +181,12 @@ const ScholarshipList = () => {
                       <td className="py-2">{scholarship.name}</td>
                       <td className="py-2">{scholarship.deadline}</td>
                       <td className="py-2">{scholarship.amount}</td>
-                      <td className="py-2 flex space-x-2">
-                        <a href={scholarship.link} target="_blank" className="bg-blue-500 text-white px-4 py-2 rounded">
-                          Apply now
-                        </a>
+                      <td className="py-2 flex space-x-2 ml-10">
                         <button
                           onClick={() => handleView(scholarship.id)}
-                          className="bg-green-500 text-white px-4 py-2 rounded"
+                          className="bg-[#2E3192] text-white px-4 py-2 rounded"
                         >
-                          View
+                          Apply Now
                         </button>
                       </td>
                     </tr>
@@ -206,7 +212,9 @@ const ScholarshipList = () => {
                   Next
                 </button>
               </div>
+              </div>
             </>
+           
           )}
         </div>
       </div>
