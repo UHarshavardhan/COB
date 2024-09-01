@@ -7,8 +7,8 @@ function EnquireForm() {
     <div className="App mb-20">
       <ScholarshipHeader 
         breadcrumb="Home &gt; Find Scholarship" 
-        title="Scholarships To Apply For" 
-        subtitle="Here are some of the best college scholarships with approaching deadlines for high school seniors"
+        title="Your Path to Your Dream University Starts Here!" 
+        subtitle="Fill in your details and express interest in a free education assessment, where you can get all your questions answered."
       />
       <EnquireFormComponent />
     </div>

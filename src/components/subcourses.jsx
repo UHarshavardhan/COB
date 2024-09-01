@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllCourses } from "../firebase/Course"; 
+import ScholarshipHeader from "./ScholarshipHeader";
 
 function SubCourses() {
   const navigate = useNavigate();
@@ -26,6 +27,12 @@ function SubCourses() {
   };
 
   return (
+    <>
+      <ScholarshipHeader 
+        breadcrumb="Home &gt; Popular Careers" 
+        title="Popular Careers To Apply For" 
+        subtitle="Here are some of the best courses"
+      />
     <div className="flex justify-center items-center w-full mt-6">
       <div className="grid lg:grid-cols-3 grid-cols-1 lg:mx-15 mx-[5%] gap-5">
         {courses.map((item, index) => (
@@ -51,6 +58,7 @@ function SubCourses() {
         ))}
       </div>
     </div>
+    </>
   );
 }
 

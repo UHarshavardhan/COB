@@ -152,9 +152,9 @@ const Coursedetails = () => {
   return (
     <>
       <ScholarshipHeader
-        breadcrumb="Home &gt; Find Scholarship"
-        title="Scholarships To Apply For"
-        subtitle="Here are some of the best college scholarships with approaching deadlines for high school seniors"
+        breadcrumb="Home &gt; Course Details"
+        title="Details of course"
+        subtitle="Here are some of the best Courses with details"
       />
       <div className="min-h-screen lg:mx-[4%] flex flex-col items-center">
         <div className="w-full p-6 mt-6 flex flex-col lg:flex-row">

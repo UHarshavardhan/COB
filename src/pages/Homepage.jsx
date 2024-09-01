@@ -12,12 +12,8 @@ import Aboutus from "../components/aboutus.jsx";
 import CollegeRanking from "../components/CollegeRanking.jsx";
 import LatestNews from "../components/LatestNews.jsx";
 import Review from '../components/review.jsx';
-import Scroll from "../components/scroll.jsx";
 import Subscribe from "../components/subscribe.jsx";
 import MobileCollegeRanking from "../components/mobileCollegeRanking.jsx";
-import Collegetab from "../components/Colleges.jsx";
-import Hotels from "../components/hotels.jsx";
-import { exampleUsage } from "../firebase/Course.js";
 import Carrers from "../components/carrers.jsx";
 
 function Homepage() {
@@ -95,7 +91,7 @@ function Homepage() {
                 </div>
 
 
-z
+
 
             <Courses/>
             <div className="college-options flex flex-col mx-[5%] mt-28 px-4">

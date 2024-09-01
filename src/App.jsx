@@ -32,6 +32,7 @@ import SubCourses from './components/subcourses.jsx';
 import Scholarship_Screen from './pages/scholarshipscreen.jsx';
 import CollegeEnquireFormComponent from './components/admin/CollegeEnquireFormComponent.jsx';
 import CourseEnquireFormComponent from './components/admin/CourseEnquireFormComponent.jsx';
+import Popularcareers2 from './pages/popularcareers2.jsx';
 
 
 function App() {
@@ -89,13 +90,15 @@ function App() {
 
 
         <Route path="/find-scholarship" element={<ScholarshipScreen />} />
+        <Route path="/scholarship" element={<ScholarshipScreen />} />
         <Route path="/scholarship/:id" element={<Scholarship_Screen />} />
         <Route path="/enquire" element={<EnquireForm />} />
         <Route path="/scholarshipform" element={<ScholarshipFormScreen />} />
         <Route path="/coursedetails" element={<Coursedetails />} />
-        <Route path="/careers" element={<Popularcareers />} />
+        <Route path="/careers" element={<Popularcareers2 />} />
         <Route path="/courses/:category" element={<SubCourses />} />
         <Route path="/collegeoptions" element={<Popularcolleges />} />
+        <Route path="/colleges" element={<Popularcareers />} />
         <Route path="/colleges/:category" element={<Topcolleges />} />
         <Route path="/college/:id" element={<Collegedetails />} />
         <Route path="/course/:id" element={<Coursedetails />} />
