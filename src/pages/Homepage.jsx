@@ -36,22 +36,23 @@ function Homepage() {
                     </div>
                     <div className="w-[100%] mt-6 flex flex-col items-center">
                     <div className="w-[100%] flex lg:flex-row flex-col items-center">
-                        <h1 className="lg:w-[45%] text-3xl md:text-4xl lg:text-[60px] text-right font-custom  tracking-wide">A GATEWAY TO THE</h1>
-                        <div className="lg:w-[50%]">   
-                        <svg width="100%" height="100%" viewBox="0 0 745 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1">
-                        <path d="M14.4517 1C235.369 5.95839 457.497 6.06013 739.929 4.04543M7.78842 1.54288C170.609 5.02729 335.158 3.9839 739.902 3.67012M742.112 1.35293C744.208 36.1986 745.874 79.1944 739.576 94.8532M734.449 3.43557C732.968 24.2636 737.217 47.9453 734.89 95.8345M739.259 97.4961C483.631 89.8873 238.602 94.0507 11.3331 95.7147M735.33 96.9335C504.997 100.026 262.097 99.9248 5.50721 94.7278M12.4248 94.3922C-2.4012 68.0709 8.03613 43.7055 1 1.83724M3.20732 95.1848C8.1733 57.7325 16.2822 21.9665 11.1203 1.64519" stroke="#2E3192" strokeWidth="2" strokeLinecap="round"/>
-                        <foreignObject x="0" y="30" width="100%" height="100">
-                            <div xmlns="http://www.w3.org/1999/xhtml" className="text-center">
-                            <h1 className="text-3xl md:text-4xl lg:text-[60px] font-extrabold text-blue-900 font-custom tracking-wide">
-                                TOP BANGALORE COLLEGES
-                            </h1>
-                            </div>
-                        </foreignObject>
-                        </svg>
+                        <h1 className="lg:w-[45%] text-3xl md:text-4xl lg:text-[75px] text-right font-custom  tracking-wide">A GATEWAY TO THE</h1>
+                        <div className="lg:w-[65%]">  
+                        <svg width="110%" height="100%" viewBox="0 0 800 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1" >
+  <path d="M14.4517 1C235.369 5.95839 457.497 6.06013 739.929 4.04543M7.78842 1.54288C170.609 5.02729 335.158 3.9839 739.902 3.67012M742.112 1.35293C744.208 36.1986 745.874 79.1944 739.576 94.8532M734.449 3.43557C732.968 24.2636 737.217 47.9453 734.89 95.8345M739.259 97.4961C483.631 89.8873 238.602 94.0507 11.3331 95.7147M735.33 96.9335C504.997 100.026 262.097 99.9248 5.50721 94.7278M12.4248 94.3922C-2.4012 68.0709 8.03613 43.7055 1 1.83724M3.20732 95.1848C8.1733 57.7325 16.2822 21.9665 11.1203 1.64519" stroke="#2E3192" strokeWidth="2" strokeLinecap="round"/>
+  <foreignObject x="-20" y="5" width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" className="text-center">
+      <h1 className="text-3xl md:text-4xl lg:text-[65px] text-blue-900 font-custom tracking-wide mt-4 p-3 leading-6">
+        TOP BANGALORE COLLEGES
+      </h1>
+    </div>
+  </foreignObject>
+</svg>
+
                         </div>
                     </div>
-                    <div className="Main-heading2 mt-4">
-                        <h1 className="font-bold text-3xl md:text-4xl lg:text-[50px] text-center font-custom  tracking-wide">AND THE BEST STUDENT LIFE IN CITY</h1>
+                    <div className="Main-heading2 mt-8">
+                        <h1 className="font-bold text-3xl md:text-4xl lg:text-[70px] text-center font-custom  tracking-wide">AND THE BEST STUDENT LIFE IN CITY</h1>
                     </div>
                     <div className="sub-heading text-center mt-6">
                         <p className="text-slate-500 text-lg md:text-xl lg:text-2xl font-inter">We are thrilled to provide you the real-world <br/>knowledge and guide you through a variety of career options</p>

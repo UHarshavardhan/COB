@@ -58,7 +58,7 @@ const LatestNews = () => {
   const selectedBlogs = blogs.slice(startIndex, startIndex + PAGE_SIZE);
 
   return (
-    <div id="blogs" className="flex bg-gradient-to-b from-purple-300 to-purple-100  flex-col  justify-center  max-w-fit  ">
+    <div id="blogs" className="flex bg-gradient-to-b from-purple-100 to-purple-200  flex-col  justify-center  max-w-fit  ">
       <h1 className="text-3xl lg:text-5xl font-bold mb-4 text-left text-[#2E3192] mt-10 font-pop">Latest News</h1>
       <p className="mb-8 text-left lg:text-xl text-[#6E7C91] font-pop">Catch the Latest Career & Education-Related Headlines! <br/>
       We deliver up-to-the-minute happenings in the job market and exciting career opportunities</p>
@@ -132,7 +132,7 @@ const LatestNews = () => {
         
       </div>
       <div clas>
-          <img src={curve} className='w-[1906px] h-[190px] max-w-full'/>
+          <img src={curve} className='w-[1906px] h-[100px] max-w-full'/>
         </div>
     </div>
     
