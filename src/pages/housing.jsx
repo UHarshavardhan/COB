@@ -10,8 +10,8 @@ function Housing() {
     <div className="App mb-20">
       <ScholarshipHeader 
         breadcrumb="Home &gt; Top Colleges" 
-        title="Top Colleges" 
-        subtitle="Engineering minds for a sustainable tomorrow "
+        title="Find Student Accommodation,That Best Suits You" 
+        subtitle="On a Budget or something with a view? We've got you! "
       />
       <div className='lg:mt-[-80px] lg:mx-[3%]'>
       <Hotels/>

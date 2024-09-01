@@ -24,6 +24,16 @@ import Topcolleges from './pages/topcolleges.jsx';
 import Housing from './pages/housing.jsx';
 import Colleges from './components/admin/colleges.jsx';
 import Courses from './components/admin/courses.jsx';
+import News from './components/admin/news.jsx';
+import NewsDetailScreen from './pages/newsFullScreen.jsx';
+import Collegedetails from './pages/Collegedetails.jsx';
+import Login from './pages/login.jsx';
+import SubCourses from './components/subcourses.jsx';
+import Scholarship_Screen from './pages/scholarshipscreen.jsx';
+import CollegeEnquireFormComponent from './components/admin/CollegeEnquireFormComponent.jsx';
+import CourseEnquireFormComponent from './components/admin/CourseEnquireFormComponent.jsx';
+import Popularcareers2 from './pages/popularcareers2.jsx';
+
 
 function App() {
 
@@ -40,7 +50,7 @@ function App() {
   // }, []);
 
 
-  const [selectedComponent, setSelectedComponent] = useState(null);
+  const [selectedComponent, setSelectedComponent] = useState('Scholarships');
   const renderComponent = () => {
     switch (selectedComponent) {
       case 'AdminPanel':
@@ -59,6 +69,14 @@ function App() {
        return <Colleges/>
       case 'Courses':
         return <Courses/>;
+      case 'blog':
+        return <Blogs/>;
+      case 'News':
+        return <News/>;
+      case 'CollegeEnquiry':
+        return   <CollegeEnquireFormComponent />
+      case 'CourseEnquiry':
+        return   <CourseEnquireFormComponent />
       default:
         return <Blogs/>;
     }
@@ -68,13 +86,22 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/blog/:id" element={<BlogDetailScreen />} />
+        <Route path="/news/:id" element={<NewsDetailScreen />} />
+
+
+        <Route path="/find-scholarship" element={<ScholarshipScreen />} />
         <Route path="/scholarship" element={<ScholarshipScreen />} />
+        <Route path="/scholarship/:id" element={<Scholarship_Screen />} />
         <Route path="/enquire" element={<EnquireForm />} />
         <Route path="/scholarshipform" element={<ScholarshipFormScreen />} />
         <Route path="/coursedetails" element={<Coursedetails />} />
-        <Route path="/careers" element={<Popularcareers />} />
+        <Route path="/careers" element={<Popularcareers2 />} />
+        <Route path="/courses/:category" element={<SubCourses />} />
         <Route path="/collegeoptions" element={<Popularcolleges />} />
-        <Route path="/colleges" element={<Topcolleges />} />
+        <Route path="/colleges" element={<Popularcareers />} />
+        <Route path="/colleges/:category" element={<Topcolleges />} />
+        <Route path="/college/:id" element={<Collegedetails />} />
+        <Route path="/course/:id" element={<Coursedetails />} />
         <Route path="/housing" element={<Housing />} />
 
 
@@ -91,7 +118,7 @@ function App() {
 
 
         {/* Uncomment and ensure these components exist for the following routes to work */}
-        {/* <Route path="/login" element={<LoginPage />} /> */}
+        <Route path="/login" element={<Login />} />
         {/* <Route path="/signup" element={<SignUpPage />} /> */}
       </Routes>
       <Footer />

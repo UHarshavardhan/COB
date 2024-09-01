@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import img from '../images/image1.png';
-import colleges from '../jsondata/top10clg.js';
+import React, { useState, useEffect } from 'react';
+import { getAllColleges, getCategories } from '../firebase/College'; // Import the function to fetch data
+import { Link } from 'react-router-dom';
 
 const categories = ["MBA/PGDM", "MBBS", "ME/MTech", "BE/BTech", "Graduate Diploma in Education", "BMM", "MCA"];
 
-const CollegeCard = ({ rank, name, fees, placement, review, isExpanded, toggleExpand }) => {
+const CollegeCard = ({ rank, name,image, fees, placement, review,  id }) => {
+ 
   return (
     <div className="border rounded-lg p-4 flex flex-col md:flex-row items-center justify-between bg-white shadow-md mb-4 md:mb-6">
       <div className="flex items-center w-full md:w-auto">
         <div className="text-lg font-semibold w-16 md:w-20">{rank}</div>
         <img
-          src={img}
+          src={image}
           alt="college-logo"
           className="h-12 w-12 md:h-16 md:w-16 mx-4"
         />
@@ -19,62 +20,59 @@ const CollegeCard = ({ rank, name, fees, placement, review, isExpanded, toggleEx
           <p className="text-sm text-gray-600">CAT/GMAT</p>
         </div>
       </div>
+      <Link to={`/college/${id}`} className="text-blue-600 font-semibold">View Details</Link>
+   
 
-      {/* Mobile Expansion Button */}
-      <button
-        className="md:hidden text-blue-600 font-semibold mt-4"
-        onClick={toggleExpand}
-      >
-        {isExpanded ? 'Close' : 'Open'}
-      </button>
+    </ div >
 
-      {/* Conditional Rendering of Details */}
-      <div className={`w-full md:w-auto ${isExpanded ? 'block' : 'hidden'} md:block`}>
-        <div className="text-center mt-4 md:mt-0">
-          <p className="text-gray-700">Course Fees</p>
-          <p className="font-semibold">{fees}</p>
-        </div>
-        <div className="text-center mt-4 md:mt-0">
-          <p className="text-gray-700">Placement</p>
-          <p className="font-semibold">{placement}</p>
-          <p className="text-xs text-gray-600">Highest Package</p>
-        </div>
-        <div className="text-center mt-4 md:mt-0">
-          <p className="text-gray-700">User Reviews</p>
-          <p className="font-semibold">{review}</p>
-          <p className="text-xs text-gray-600">Based on 234 reviews</p>
-        </div>
-        <button className="text-blue-600 font-semibold mt-4 md:mt-0">View Details</button>
-      </div>
-    </div>
-  );
+)
+  
 };
 
 const  MobileCollegeRanking = () => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-  const [expandedCard, setExpandedCard] = useState(null);
+  const [colleges, setColleges] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch categories and colleges
+        const fetchedCategories = await getCategories();
+        const fetchedColleges = await getAllColleges();
+
+        // Set categories and default selectedCategory
+        setCategories(fetchedCategories);
+        if (fetchedCategories.length > 0) {
+          setSelectedCategory(fetchedCategories[0]);
+        }
+
+        // Set colleges
+        setColleges(fetchedColleges);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // Filter colleges based on the selected category
-  const filteredColleges = colleges.filter(
-    (college) => college.category === selectedCategory
-  );
-
-  // Toggle expand/collapse of a card
-  const handleExpandToggle = (index) => {
-    setExpandedCard(expandedCard === index ? null : index);
-  };
+  const filteredColleges = colleges
+    .filter(college => college.category === selectedCategory)
+    .sort((a, b) => b.popularity_score - a.popularity_score)
+    .slice(0, 10); // Top 10 colleges
 
   return (
-    <div className="mx-auto p-4 md:p-6 lg:mx-[10%]">
-      <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Top 10 Colleges</h1>
+    <div className="lg:mx-[10%] mx-auto p-6">
+      <h1 className="text-[64px] mb-6 font-pop text-[#2E3192] font-semibold">Top 10 Colleges</h1>
 
-      {/* Category Selection */}
-      <div className="flex overflow-x-auto mb-4 md:mb-6 space-x-2">
-        {categories.map((category, index) => (
+      <div className="flex justify-between overflow-x-auto mb-6">
+        {categories.length > 0 && categories.map((category, index) => (
           <button
             key={index}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 text-sm font-medium rounded-full whitespace-nowrap ${
+            className={`px-4 py-2 mx-1 text-sm font-medium rounded-full ${
               selectedCategory === category
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-200 text-gray-700'
@@ -90,14 +88,14 @@ const  MobileCollegeRanking = () => {
         {filteredColleges.length > 0 ? (
           filteredColleges.map((college, index) => (
             <CollegeCard
-              key={index}
-              rank={college.rank}
+              key={college.id}
+              rank={index + 1}
               name={college.name}
+              image={college.image}
               fees={college.fees}
               placement={college.placement}
-              review={college.review}
-              isExpanded={expandedCard === index}
-              toggleExpand={() => handleExpandToggle(index)}
+              review={college.rating} // Assuming rating is used for review
+              id={college.id}
             />
           ))
         ) : (

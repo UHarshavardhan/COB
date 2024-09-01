@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getCollegeById } from '../firebase/College';
+import { createEnquiry } from '../firebase/college_Enquireform'; // Import createEnquiry function
 import ScholarshipHeader from '../components/ScholarshipHeader';
-import { createEnquiry } from '../firebase/course_Enquireform'; // Import createEnquiry function
 
-import { readCourse } from '../firebase/Course'; // Import your readCourse function
-
-const Coursedetails = () => {
-  const { id } = useParams(); // Get the course ID from the URL
-  const [course, setCourse] = useState(null); // State for course details
+const Collegedetails = () => {
+  const { id } = useParams(); // Get the college ID from the URL
+  const [college, setCollege] = useState(null);
   const [activeTab, setActiveTab] = useState('about');
-  const [moreOption, setMoreOption] = useState(null);
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
   const [enquiry, setEnquiry] = useState({
     name: '',
     email: '',
@@ -20,22 +16,20 @@ const Coursedetails = () => {
     message: '',
   });
 
-
   useEffect(() => {
-    const fetchCourse = async () => {
+    const fetchCollege = async () => {
       try {
-        const courseData = await readCourse(id); // Fetch course details
-        setCourse(courseData);
-        console.log(courseData)
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
+        const collegeData = await getCollegeById(id);
+        console.log(collegeData);
+        setCollege(collegeData);
+      } catch (error) {
+        console.error('Error fetching college details:', error);
       }
     };
 
-    fetchCourse();
+    fetchCollege();
   }, [id]);
+
   const handleChange = (e) => {
     setEnquiry({
       ...enquiry,
@@ -48,6 +42,7 @@ const Coursedetails = () => {
     try {
       const enquiryData = {
         ...enquiry,
+        collegeName: college.name,
       };
       await createEnquiry(enquiryData);
       alert('Enquiry submitted successfully!');
@@ -63,87 +58,75 @@ const Coursedetails = () => {
       alert('Failed to submit enquiry');
     }
   };
+
   const renderContent = () => {
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
-    if (!course) return <p>No course found</p>;
+    if (!college) return null;
 
     switch (activeTab) {
       case 'about':
         return (
           <div>
             <h2 className="text-xl font-semibold mb-2">About</h2>
-            <p className="text-gray-700">{course.description || 'No description available.'}</p>
+            <div className="text-gray-700 whitespace-pre-line">{college.overview}</div>
           </div>
         );
-      case 'eligibility':
+          
+      case 'highlights':
         return (
           <div>
-            <h2 className="text-xl font-semibold mb-2">Eligibility</h2>
-            <p className="text-gray-700">{course.eligibility || 'No eligibility criteria provided.'}</p>
-          </div>
-        );
-      case 'recruiters':
-        return (
-          <div>
-            <h2 className="text-xl font-semibold mb-2">Top Recruiters</h2>
-            <p className="text-gray-700">{course.topRecruiters || 'No recruiter information available.'}</p>
-          </div>
-        );
-      case 'more':
-        return (
-          <div>
-            <h2 className="text-xl font-semibold mb-2">More</h2>
-            <p className="text-gray-700 mb-4">Select an option to see more details:</p>
-            <div className="flex space-x-4">
-              <button
-                className={`px-4 py-2 rounded-lg ${
-                  moreOption === 'scope' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
-                }`}
-                onClick={() => setMoreOption('scope')}
-              >
-                Scope
-              </button>
-              <button
-                className={`px-4 py-2 rounded-lg ${
-                  moreOption === 'career' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
-                }`}
-                onClick={() => setMoreOption('career')}
-              >
-                Career Opportunities
-              </button>
-              <button
-                className={`px-4 py-2 rounded-lg ${
-                  moreOption === 'future' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
-                }`}
-                onClick={() => setMoreOption('future')}
-              >
-                Future Trends
-              </button>
-            </div>
+            <h2 className="text-xl font-semibold mb-2">Highlights</h2>
+            <table className="min-w-full bg-white border border-gray-200">
+              <tbody>
+                {college.highlights.map((highlight, index) => (
+                    <>
+                  <tr key={index} className="border">
+                    <td className="px-4 py-2 border">{highlight?.details}</td>
+                  <td className="px-4 py-2 border">{highlight?.highlight}</td>
 
-            <div className="mt-4">
-              {moreOption === 'scope' && (
-                <div>
-                  <h3 className="text-lg font-semibold">Scope</h3>
-                  <p className="text-gray-700">{course.scope || 'No scope information available.'}</p>
-                </div>
-              )}
-              {moreOption === 'career' && (
-                <div>
-                  <h3 className="text-lg font-semibold">Career Opportunities</h3>
-                  <p className="text-gray-700">{course.jobRoles || 'No career opportunities information available.'}</p>
-                </div>
-              )}
-              {moreOption === 'future' && (
-                <div>
-                  <h3 className="text-lg font-semibold">Future Trends</h3>
-                  <p className="text-gray-700">{course.futureTrends || 'No future trends information available.'}</p>
-                </div>
-              )}
-            </div>
+                  </tr>
+               
+                </>
+                ))}
+              </tbody>
+            </table>
           </div>
         );
+      case 'courses':
+        return (
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Courses</h2>
+            <table className="min-w-full bg-white border border-gray-200">
+              <tbody>
+                {college.courses.map((course, index) => (
+                  <tr key={index} className="border-b">
+                    <td className="px-4 py-2">{course[0]}</td>
+                    <td className="px-4 py-2">{course[1]}</td> 
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+        case 'admission':
+            return (
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Admission</h2>
+                <div className="text-gray-700 whitespace-pre-line">
+                  {college.admission}
+                </div>
+              </div>
+            );
+          
+          case 'placement':
+            return (
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Placement</h2>
+                <div className="text-gray-700 whitespace-pre-line">
+                  {college.placement}
+                </div>
+              </div>
+            );
+          
       default:
         return null;
     }
@@ -151,29 +134,23 @@ const Coursedetails = () => {
 
   return (
     <>
-      <ScholarshipHeader
-        breadcrumb="Home &gt; Course Details"
-        title="Details of course"
-        subtitle="Here are some of the best Courses with details"
+      <ScholarshipHeader 
+        breadcrumb="Home &gt; College Details" 
+        title={college ? college.name : "College Details"} 
+        subtitle="Explore detailed information about this college."
       />
       <div className="min-h-screen lg:mx-[4%] flex flex-col items-center">
         <div className="w-full p-6 mt-6 flex flex-col lg:flex-row">
           {/* Left Section */}
           <div className="lg:w-3/5 lg:pr-6 w-full">
-            {/* Video Section */}
+            {/* College Image and Video */}
             <div className="bg-gray-200 h-56 rounded-lg flex items-center justify-center">
-              {course?.video ? (
-                <video className="w-full h-full" controls>
-                  <source src={course.video} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <button className="bg-blue-600 text-white p-4 rounded-full">
-                  ▶️ Watch Video
-                </button>
-              )}
+              <img
+                src={college ? college.image : ''}
+                alt={college ? college.name : ''}
+                className="w-full h-full object-cover"
+              />
             </div>
-
             {/* Tabs */}
             <div className="flex mt-4 space-x-4 overflow-auto">
               <button
@@ -186,30 +163,37 @@ const Coursedetails = () => {
               </button>
               <button
                 className={`px-4 py-2 rounded-lg ${
-                  activeTab === 'eligibility' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
+                  activeTab === 'highlights' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
                 }`}
-                onClick={() => setActiveTab('eligibility')}
+                onClick={() => setActiveTab('highlights')}
               >
-                Eligibility
+                Highlights
               </button>
               <button
                 className={`px-4 py-2 rounded-lg ${
-                  activeTab === 'recruiters' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
+                  activeTab === 'courses' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
                 }`}
-                onClick={() => setActiveTab('recruiters')}
+                onClick={() => setActiveTab('courses')}
               >
-                Recruiters
+                Courses
               </button>
               <button
                 className={`px-4 py-2 rounded-lg ${
-                  activeTab === 'more' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
+                  activeTab === 'admission' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
                 }`}
-                onClick={() => setActiveTab('more')}
+                onClick={() => setActiveTab('admission')}
               >
-                More
+                Admission
+              </button>
+              <button
+                className={`px-4 py-2 rounded-lg ${
+                  activeTab === 'placement' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
+                }`}
+                onClick={() => setActiveTab('placement')}
+              >
+                Placement
               </button>
             </div>
-
             {/* Content Section */}
             <div className="mt-4">
               {renderContent()}
@@ -295,6 +279,6 @@ const Coursedetails = () => {
       </div>
     </>
   );
-}
+};
 
-export default Coursedetails;
+export default Collegedetails;

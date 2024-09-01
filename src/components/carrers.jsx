@@ -1,19 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import courseData from "../jsondata/courses.js";
+import CarrersData from "../jsondata/carrers.js";
 
-function Courses() {
+function Carrers() {
   const navigate = useNavigate();
 
   const handleCourseClick = (course) => {
-    navigate(`/colleges/${course}`);
+    navigate(`/courses/${course}`);
   };
 
   return (
     <>
       <div className="flex justify-center items-center w-full mt-6">
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:mx-15 mx-[5%] gap-5">
-          {courseData.data.map((item, index) => (
+          {CarrersData.data.map((item, index) => (
             <div
               className="flex flex-row w-[100%] h-[160px] bg-white rounded-lg shadow-[6px_6px_12px_6px_rgba(0,0,0,0.1)] border shadow-gray-300 cursor-pointer"
               key={index}
@@ -40,4 +40,4 @@ function Courses() {
   );
 }
 
-export default Courses;
+export default Carrers;
