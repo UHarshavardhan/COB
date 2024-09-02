@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { CiLocationOn } from "react-icons/ci";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
 import { MdOutlineBed } from "react-icons/md";
-import { getAllAccommodations } from "../firebase/Accomodation"; // Import the function to get data from Firebase
+import { getAllAccommodations } from "../firebase/Accomodation"; 
 
 function Hotels() {
     const [budget, setBudget] = useState(500);
     const [propertyType, setPropertyType] = useState('Shared room');
     const [amenities, setAmenities] = useState([]);
-    const [hotels, setHotels] = useState([]); // State to store fetched data
+    const [hotels, setHotels] = useState([]); 
+    const [sortOrder, setSortOrder] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getAllAccommodations(); // Fetch data from Firebase
+                const data = await getAllAccommodations(); 
                 setHotels(data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -33,12 +34,41 @@ function Hotels() {
                 : [...prev, amenity]
         );
     };
+    const handelSortchange = (order)=>{
+        console.log(order);
+        setSortOrder(order);
+        const sortedhotels=[...hotels].sort((a,b)=>{
+            if(order === 'lowToHigh'){
+                console.log(a.price);
+                console.log(b.price);
+              return   a.price - b.price;
+            }
+            else if (order === 'highToLow') {
+                return  b.price - a.price;
+            }
+            return 0;
+        });
+     setHotels(sortedhotels);
+    };
+    const handelrange=(budget)=>{
+        const budgetHotels=[...hotels].filter((hotel)=>{
+               return hotel.price<=budget;
+        })
+        setHotels(budgetHotels);
+    }
+    const handlePropertyType =(type)=>{
+            const property=[...hotels].filter((hotel)=>{
+               return hotel.Property_Type === type
+            });
+    }
+
+
 
     return (
         <>
-            <div className="flex flex-col items-center">
-                <div className="flex flex-row">
-                    <div className="w-[418px] p-6 bg-purple-50 rounded-lg shadow-lg ml-2 h-[1280px]">
+            <div className="flex flex-col ">
+                <div className="flex flex-row justify-start">
+                    <div className="flex flex-col justify-start w-[418px] p-6 bg-purple-50 rounded-lg shadow-lg ml-2 h-[1280px]">
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-xl font-semibold">Filters</h2>
                             <button className="text-gray-400 text-sm">Reset all</button>
@@ -48,15 +78,11 @@ function Hotels() {
                             <h3 className="text-lg font-semibold">Sort By</h3>
                             <div className="flex flex-col text-sm text-gray-600">
                                 <label className="flex items-center">
-                                    <input type="radio" name="sort" className="mr-2" />
-                                    Nearest
-                                </label>
-                                <label className="flex items-center">
-                                    <input type="radio" name="sort" className="mr-2" />
+                                    <input type="radio" name="sort" className="mr-2" checked={sortOrder === 'lowToHigh'} onChange={() => handelSortchange('lowToHigh')} />
                                     Price: Low to high
                                 </label>
                                 <label className="flex items-center">
-                                    <input type="radio" name="sort" className="mr-2" />
+                                    <input type="radio" name="sort" className="mr-2" checked={sortOrder === 'highToLow'} onChange={() => handelSortchange('highToLow')}/>
                                     Price: High to low
                                 </label>
                             </div>
@@ -73,7 +99,10 @@ function Hotels() {
                                 min="0"
                                 max="1000"
                                 value={budget}
-                                onChange={(e) => setBudget(e.target.value)}
+                                onChange={(e) => {setBudget(e.target.value);
+                                    handelrange(e.target.value);
+                                }}
+                                
                                 className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer mb-2"
                             />
                         </div>
@@ -87,7 +116,9 @@ function Hotels() {
                                         name="propertyType"
                                         value="Entire Place"
                                         checked={propertyType === 'Entire Place'}
-                                        onChange={() => handlePropertyTypeChange('Entire Place')}
+                                        onChange={() =>{ handlePropertyTypeChange('Entire Place');handlePropertyType('Entire Place');
+
+                                        }}
                                         className="mr-2"
                                     />
                                     Entire Place
@@ -98,7 +129,7 @@ function Hotels() {
                                         name="propertyType"
                                         value="Private room"
                                         checked={propertyType === 'Private room'}
-                                        onChange={() => handlePropertyTypeChange('Private room')}
+                                        onChange={() => {handlePropertyTypeChange('Private room');handlePropertyType('Private room')}}
                                         className="mr-2"
                                     />
                                     Private room
@@ -109,7 +140,7 @@ function Hotels() {
                                         name="propertyType"
                                         value="Shared room"
                                         checked={propertyType === 'Shared room'}
-                                        onChange={() => handlePropertyTypeChange('Shared room')}
+                                        onChange={() =>{handlePropertyTypeChange('Shared room');handlePropertyType('Shared room')}}
                                         className="mr-2"
                                     />
                                     Shared room
@@ -131,14 +162,9 @@ function Hotels() {
                                 ))}
                             </div>
                         </div>
-                        <hr className="mb-4" />
-                        <div className="flex justify-center">
-                            <button className="w-full bg-blue-600 text-white py-2 rounded-lg text-lg">
-                                Apply
-                            </button>
-                        </div>
+                        
                     </div>
-                    <div className="grid grid-cols-2 gap-3 ml-14">
+                    <div className="grid grid-cols-2 gap-9 ml-14">
                         {hotels.map((item, index) => (
                             <div className="flex flex-col w-[348px] h-[483px] shadow-lg" key={index}>
                                 <div className="flex">
