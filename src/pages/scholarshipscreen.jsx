@@ -65,48 +65,52 @@ const Scholarship_Screen = () => {
 
         <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg px-8">
            <h2 className="font-semibold mt-5 ml-3 font-pop text-[34px] text-indigo-700">About Scholarship</h2>
-          <hr className='flex justify-center  bg-center border-1 '/>
+          <hr className='flex border-1 '/>
           <p className="text-gray-700 text-sm">
             {scholarship.about}
           </p>
         </div>
 
         
-        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg">
+        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg px-8">
           <h2 className="font-semibold my-5 ml-3 font-pop text-[34px] text-indigo-700">Overview</h2>
-          <hr className='w-[20px]'/>
+          <hr className='flex border-1 '/>
           <p className="text-gray-700 text-sm">
             {scholarship.overview}
           </p>
         </div>
 
         {/* Benefits Section */}
-        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg">
+        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg px-8">
           <h2 className="font-semibold my-5 ml-3 font-pop text-[34px] text-indigo-700">Benefits</h2>
+          <hr className='flex border-1 '/>
           <p className="text-gray-700 text-sm">
             {scholarship.benefits}
           </p>
         </div>
 
         {/* Renewal Policy Section */}
-        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg">
+        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg px-8">
           <h2 className="font-semibold my-5 ml-3 font-pop text-[34px] text-indigo-700">Renewal Policy</h2>
+          <hr className='flex border-1 '/>
           <p className="text-gray-700 text-sm">
             {scholarship.renewalPolicy}
           </p>
         </div>
 
         {/* Eligibility Section */}
-        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg">
+        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg px-8">
           <h2 className="font-semibold my-5 ml-3 font-pop text-[34px] text-indigo-700">Eligibility</h2>
+          <hr className='flex border-1 '/>
           <p className="text-gray-700 text-sm">
             {scholarship.eligibility}
           </p>
         </div>
 
         {/* Documents Required Section */}
-        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg">
+        <div className="flex flex-col border-2 shadow-lg  mb-7 rounded-lg px-8">
           <h2 className="font-semibold my-5 ml-3 font-pop text-[34px] text-indigo-700">Documents Required</h2>
+          <hr className='flex border-1 '/>
           <p className="text-gray-700 text-sm">
             {scholarship.documentsRequired}
           </p>
