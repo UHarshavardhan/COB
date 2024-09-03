@@ -27,7 +27,7 @@ function Navigation() {
                             <p>Find scholarship</p>
                         </a>
                         <a href="/housing" className='Housing font-pop'>
-                            <p>Housing</p>
+                            <p>Accommodation</p>
                         </a>
                     </div>
                 </div>

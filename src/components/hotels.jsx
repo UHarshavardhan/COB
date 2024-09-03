@@ -57,9 +57,11 @@ function Hotels() {
         setHotels(budgetHotels);
     }
     const handlePropertyType =(type)=>{
+        console.log(type);
             const property=[...hotels].filter((hotel)=>{
-               return hotel.Property_Type === type
+               return hotel.propertyType === type
             });
+        setHotels(property);
     }
 
 

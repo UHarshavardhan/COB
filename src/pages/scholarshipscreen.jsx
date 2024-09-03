@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom'; // Assuming you're using react-rou
 import { getScholarshipById } from './../firebase/Scholarships'; // Adjust the import based on your actual service
 import Navigation from '../components/Navigation.jsx';
 import ScholarshipHeader from '../components/ScholarshipHeader.jsx';
+import ScholarshipForm from '../components/ScholarshipForm.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const Scholarship_Screen = () => {
   const { id } = useParams();
   const [scholarship, setScholarship] = useState(null);
+  const navigate=useNavigate();
 
   useEffect(() => {
     const fetchScholarship = async () => {
@@ -23,6 +26,9 @@ const Scholarship_Screen = () => {
 
   if (!scholarship) {
     return <div>Loading...</div>;
+  }
+  const handelsubmit=()=>{
+    navigate('/scholarshipform')
   }
 
   return (
@@ -42,7 +48,7 @@ const Scholarship_Screen = () => {
       Department Name : Social Justice and Special Assisstance
       </p>
 
-      <button className='bg-indigo-800 ml-[500px] text-white w-[200px] h-[40px] mt-7 rounded-md'>
+      <button className='bg-indigo-800 ml-[500px] text-white w-[200px] h-[40px] mt-7 rounded-md'  onClick={()=>handelsubmit()}>
         Apply Now 
       </button>
       </div>

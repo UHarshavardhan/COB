@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import { getAllScholarships } from './../firebase/Scholarships';
 import ScholarshipHeader from '../components/ScholarshipHeader';
-
+import ScholarshipForm from '../components/ScholarshipForm';
 const itemsPerPage = 10;
 
 const filtersData = {
@@ -186,7 +186,7 @@ const ScholarshipList = () => {
                           onClick={() => handleView(scholarship.id)}
                           className="bg-[#2E3192] text-white px-4 py-2 rounded"
                         >
-                          Apply Now
+                          View Details
                         </button>
                       </td>
                     </tr>

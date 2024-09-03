@@ -99,8 +99,8 @@ const Collegedetails = () => {
               <tbody>
                 {college.courses.map((course, index) => (
                   <tr key={index} className="border-b">
-                    <td className="px-4 py-2">{course[0]}</td>
-                    <td className="px-4 py-2">{course[1]}</td> 
+                    <td className="px-4 py-2">{course?.course}</td>
+                    <td className="px-4 py-2">{course?.details}</td> 
                   </tr>
                 ))}
               </tbody>
