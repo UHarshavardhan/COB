@@ -150,22 +150,16 @@ const ScholarshipList = () => {
             resetFilters={resetFilters}
           />
         </div>
-        <div className="w-full sm:w-3/4 bg-white p-4 rounded-lg shadow">
+        <div className="w-full sm:w-3/4">
           {loading ? (
             <p>Loading...</p>
           ) : (
             <>
             <div className='flex flex-col'>
-             <div className='flex flex-row bg-white rounded-md shadow-[6px_6px_12px_6px_rgba(0,0,0,0)] border shadow-gray-100 cursor-pointer h-[55px] items-center'>
-              <p className='ml-5'>Sr no</p>
-              <p className='ml-[110px]'>Scholarship</p>
-              <p className='ml-[180px]'>Deadline</p>
-              <p className='ml-[100px]'>Amount</p>
-
-             </div>
-            
-              <table className="w-full mt-3 ml-5">
-                {/* <thead>
+                       
+              {/* <table className="w-full mt-3">
+                <thead>
+                  <div  className="my-2 bg-white justify-between rounded-md shadow-[6px_6px_12px_6px_rgba(0,0,0,0)] border shadow-gray-100 cursor-pointer h-[55px] ">
                   <tr >
                     <th className="text-left py-2 ">Sr no.</th>
                     <th className="text-left py-2">Scholarship</th>
@@ -173,10 +167,12 @@ const ScholarshipList = () => {
                     <th className="text-left py-2">Amount</th>
                     <th></th>
                   </tr>
-                </thead> */}
+                  </div>
+                </thead>
                 <tbody>
                   {paginatedScholarships.map((scholarship, index) => (
-                    <tr key={scholarship.id} className="border-b">
+                    <div  className="my-2 bg-white justify-between  rounded-md shadow-[6px_6px_12px_6px_rgba(0,0,0,0)] border shadow-gray-100 cursor-pointer h-[55px] ">
+                    <tr key={scholarship.id}>
                       <td className="py-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
                       <td className="py-2">{scholarship.name}</td>
                       <td className="py-2">{scholarship.deadline}</td>
@@ -190,9 +186,45 @@ const ScholarshipList = () => {
                         </button>
                       </td>
                     </tr>
+                    </div>
                   ))}
                 </tbody>
-              </table>
+              </table> */}
+
+          <div className="w-full  font-semibold ">
+                {/* Table Header */}
+                <div className="flex mb-2 bg-white font-bold  px-5 rounded  justify-between border shadow-md  border-gray-200 p-2 font-semibold">
+                  <div className="flex-1 text-left w-[10%]">Sr no.</div>
+                  <div className="flex-2 text-left  w-[40%]">Scholarship</div>
+                  <div className="flex-1 text-left  w-[20%]">Deadline</div>
+                  <div className="flex-1 text-left  w-[20%]">Amount</div>
+                  <div className="flex-1"></div>
+                </div>
+
+                {/* Table Rows */}
+                {paginatedScholarships.map((scholarship, index) => (
+                  <div
+                    key={scholarship.id}
+                    className="flex items-center px-5 my-2 rounded shadow-md  bg-white border border-gray-200 p-2"
+                  >
+                    <div className="flex-1 text-left w-[10%]">{(currentPage - 1) * itemsPerPage + index + 1}</div>
+                    <div className="flex-2 text-left w-[40%]">
+                      {scholarship.name}
+                      <br />
+                      {"scholarship program"}</div>
+                    <div className="flex-1 text-left w-[20%]">{scholarship.deadline}</div>
+                    <div className="flex-1  text-left w-[20%]">{scholarship.amount}</div>
+                    <div className="flex-1 text-right">
+                      <button
+                        onClick={() => handleView(scholarship.id)}
+                        className="bg-[#2E3192] text-white px-4 py-2 rounded"
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                ))}
+    </div>
               <div className="flex justify-between mt-4">
                 <button
                   className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
