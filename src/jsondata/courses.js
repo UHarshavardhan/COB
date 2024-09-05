@@ -81,6 +81,14 @@ const courseData = {
       },
       "course": "Aerospace & Aviation",
       "numberOfColleges": 34
+    },
+    {
+      "image": {
+        "src": aerospaceAviation,
+        "alt": "Aerospace & Aviation Image"
+      },
+      "course": "Others",
+      "numberOfColleges": 34
     }
   ]
 };

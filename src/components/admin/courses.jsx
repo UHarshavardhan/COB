@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid'; // Ensure uuid is installed and imported
 import AddCourse from './courseAdd'; 
-import { getAllCourses, createCourse, updateCourse } from '../../firebase/Course'; // Import the functions to interact with the API
+import { getAllCourses, createCourse, updateCourse , deleteCourse} from '../../firebase/Course'; // Import the functions to interact with the API
 
 function Courses() {
   const [courses, setCourses] = useState([]);
@@ -13,7 +13,7 @@ function Courses() {
   const [loading, setLoading] = useState(true); // Add a loading state
 
   // Categories for dropdown
-  const categories = ["All", "Engineering", "Management", "Commerce", "Medical", "Sciences", "Information Technology", "Arts & Humanities", "Design", "Aerospace & Aviation"];
+  const categories = ["All", "Engineering & technology", "Law", "Medical", "Management", "Healthcare", "Designer", "Humanities & Arts", "Aerospace & Aviation", "Marketing","Animation","Others"];
 
   // Filtered courses based on search term and selected category
   const filteredCourses = courses.filter((course) => {
@@ -65,6 +65,7 @@ function Courses() {
     // Implement the delete functionality if needed
     // await deleteCourse(courseId); // Call your API to delete
     setCourses(courses.filter((course) => course.id !== courseId));
+    deleteCourse(courseId)
   };
 
   return (

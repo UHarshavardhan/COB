@@ -85,6 +85,13 @@ const Sidebar = ({ onSelect }) => {
         >
           <span className="flex-1">News</span>
         </button>
+
+        <button
+          className={`flex items-center p-2 mx-4 rounded-md ${selected === 'Newsletter' ? 'text-white bg-[#00008B] ' : 'text-black hover:bg-gray-200'}`}
+          onClick={() => handleSelect('Newsletter')}
+        >
+          <span className="flex-1">Newsletter</span>
+        </button>
         
 
         {/* <button

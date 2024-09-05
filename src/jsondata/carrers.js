@@ -28,14 +28,6 @@ const CarrersData = {
     },
     {
       "image": {
-        "src": commerce,
-        "alt": "Commerce Image"
-      },
-      "course": "Law",
-      "numberOfColleges": 34
-    },
-    {
-      "image": {
         "src": medical,
         "alt": "Agriculture"
       },
@@ -105,7 +97,15 @@ const CarrersData = {
         },
         "course": "Animation",
         "numberOfColleges": 34
-      }
+      },
+      {
+        "image": {
+          "src": commerce,
+          "alt": "Others"
+        },
+        "course": "Others",
+        "numberOfColleges": 34
+      },
   ]
 };
 

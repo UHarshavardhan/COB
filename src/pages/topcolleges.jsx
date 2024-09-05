@@ -6,8 +6,11 @@ import Hotels from '../components/hotels.jsx';
 import Collegetab from '../components/Colleges.jsx';
 import Navigation from '../components/Navigation.jsx';
 import { GoSearch } from "react-icons/go";
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 function Topcolleges() {
+  const { category } = useParams();
   return (
     <div className="App mb-20">
       <div className=" flex flex-col bg-gradient-to-r h-[40vh] lg:h-[60vh] from-[#a1a2f8] to-[#bf90e7] p-4 lg:p-8">
@@ -16,11 +19,11 @@ function Topcolleges() {
        
       </div>
       <h1 className="flex text-4xl  lg:text-[48px] font-bold text-black mt-2 lg:mt-10 justify-center">
-      Engineering
+      {category}
       </h1>
       <div className='flex justify-center'>
       <p className="flex lg:text-[20px] text-gray-200 lg:mt-2  justify-center">
-      Engineering minds for a sustainable tomorrow 
+      Colleges of {category}
       </p>
       </div>
       <div class="flex items-center justify-center ">

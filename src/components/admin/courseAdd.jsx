@@ -14,7 +14,8 @@ function AddCourse({ course = {}, onSave, onCancel }) {
   const [popularityScore, setPopularityScore] = useState(course?.popularityScore || 0);
   const [carrierCategory, setCarrierCategory] = useState(course?.carrierCategory || "");
 
-  const categories = ["Engineering", "Law", "Commerce", "Medical", "Sciences", "Information Technology", "Arts & Humanities", "Design", "Aerospace & Aviation"];
+
+  const categories = ["Engineering & technology", "Law", "Medical", "Management", "Healthcare", "Designer", "Humanities & Arts", "Aerospace & Aviation", "Marketing","Animation","Others"];
 
   const handleSave = (e) => {
     e.preventDefault();

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import star from "../../images/star-1.png";
-import { createCollege, getAllColleges, updateCollege } from "../../firebase/College";
+import { createCollege, getAllColleges, updateCollege , deleteCollege} from "../../firebase/College";
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -14,7 +14,7 @@ function Colleges() {
   const [loading, setLoading] = useState(true); // Add a loading state
 
   // Categories for dropdown
-  const categories = ["All", "Engineering", "Management", "Commerce", "Medical", "Sciences", "Information Technology", "Arts & Humanities", "Design", "Aerospace & Aviation"];
+  const categories = ["All", "Engineering", "Management", "Commerce", "Medical", "Sciences", "Information Technology", "Arts & Humanities", "Design", "Aerospace & Aviation" , "Others"];
 
   // Filtered colleges based on search term and selected category
   const filteredColleges = colleges.filter((college) => {
@@ -66,6 +66,7 @@ function Colleges() {
     // Implement the delete functionality if needed
     // await deleteCollege(collegeId); // Call your API to delete
     setColleges(colleges.filter((college) => college.id !== collegeId));
+    deleteCollege(collegeId)
   };
 
   return (
@@ -196,7 +197,7 @@ function AddCollege({ college = {}, onSave, onCancel }) {
   const [courseFees, setCourseFees] = useState(college?.courseFees || "");
   const [coursePlacement, setCoursePlacement] = useState(college?.coursePlacement || "");
 
-  const categories = ["Engineering", "Management", "Commerce", "Medical","Sciences","Information Technology","Arts & Humanities","Design","Aerospace & Aviation"];
+  const categories = ["Engineering", "Management", "Commerce", "Medical","Sciences","Information Technology","Arts & Humanities","Design","Aerospace & Aviation","Others"];
 
   const handleFileChange = (e, setter) => {
     const file = e.target.files[0];
