@@ -5,6 +5,8 @@ function AddCourse({ course = {}, onSave, onCancel }) {
   const [image, setImage] = useState(course?.image || "");
   const [video, setVideo] = useState(course?.video || "");
   const [about, setAbout] = useState(course?.about || "");
+  const [images, setImages] = useState(course?.images || []);
+  const [videos, setVideos] = useState(course?.videos || []);
   const [eligibility, setEligibility] = useState(course?.eligibility || "");
   const [jobRoles, setJobRoles] = useState(course?.jobRoles || "");
   const [topRecruiters, setTopRecruiters] = useState(course?.topRecruiters || "");
@@ -32,7 +34,9 @@ function AddCourse({ course = {}, onSave, onCancel }) {
       benefits,
       drawbacks,
       popularityScore,
-      carrierCategory
+      carrierCategory,
+      images,
+      videos,
     };
     onSave(newCourse);
     // Reset form fields after save
@@ -166,6 +170,83 @@ function AddCourse({ course = {}, onSave, onCancel }) {
             className="border rounded-md p-2"
           ></textarea>
         </div>
+
+              {/* Images */}
+              <div className="flex flex-col space-y-2">
+          <label className="font-semibold">Images</label>
+          {images.map((image, index) => (
+            <div key={index} className="flex space-x-2 mb-2">
+              <input
+
+                type="text"
+                placeholder="Image URL"
+                value={image}
+                onChange={(e) =>
+                  setImages(
+                    images.map((i, idx) => (idx === index ? e.target.value : i))
+                  )
+                }
+                className="border rounded-md p-2 flex-grow"
+              />
+              <button
+
+                
+                type="button"
+                onClick={() => setImages(images.filter((_, idx) => idx !== index))}
+                className="bg-red-500 text-white rounded-md px-2 py-1"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+
+
+            type="button"
+            onClick={() => setImages([...images, ""])}
+            className="bg-blue-500 text-white rounded-md px-4 py-2"
+          >
+            Add Image
+          </button>
+        </div>
+        
+
+        {/* Videos */}
+        <div className="flex flex-col space-y-2">
+          <label className="font-semibold">Videos</label>
+          {videos.map((video, index) => (
+            <div key={index} className="flex space-x-2 mb-2">
+              <input
+                type="text"
+                placeholder="Video URL"
+                value={video}
+                onChange={(e) =>
+                  setVideos(
+                    videos.map((v, idx) => (idx === index ? e.target.value : v))
+                  )
+                }
+                className="border rounded-md p-2 flex-grow"
+              />
+              <button
+
+                type="button"
+                onClick={() => setVideos(videos.filter((_, idx) => idx !== index))}
+                className="bg-red-500 text-white rounded-md px-2 py-1"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+
+            type="button"
+            onClick={() => setVideos([...videos, ""])}
+            className="bg-blue-500 text-white rounded-md px-4 py-2"
+          >
+            Add Video
+          </button>
+        </div>
+        
 
         {/* Popularity Score */}
         <div className="flex flex-col space-y-2">

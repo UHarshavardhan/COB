@@ -185,6 +185,8 @@ function AddCollege({ college = {}, onSave, onCancel }) {
   const [image, setImage] = useState(college?.image || "");
   const [brochure_link, setBrochureLink] = useState(college?.brochure_link || "");
   const [video_link, setVideoLink] = useState(college?.video_link || "");
+  const [videos, setVideos] = useState(college?.videos || []);
+  const [images, setImages] = useState(college?.images || []); // Add images state
   const [overview, setOverview] = useState(college?.overview || "");
   const [highlights, setHighlights] = useState(college?.highlights || [{ highlight: "", details: "" }]);
   const [courses, setCourses] = useState(college?.courses || [{ course: "", details: "" }]);
@@ -228,7 +230,9 @@ function AddCollege({ college = {}, onSave, onCancel }) {
       popularity_score,
       category,
       courseFees,
-      coursePlacement
+      coursePlacement,
+      videos,
+      images
     };
     onSave(newCollege);
     // Reset form fields after save
@@ -247,6 +251,7 @@ function AddCollege({ college = {}, onSave, onCancel }) {
     setCategory("");
     setCourseFees("");
     setCoursePlacement("");
+    setVideos([]);
   };
 
   return (
@@ -387,6 +392,84 @@ function AddCollege({ college = {}, onSave, onCancel }) {
             Add Highlight
           </button>
         </div>
+        
+        {/* Images */}
+        <div className="flex flex-col space-y-2">
+          <label className="font-semibold">Images</label>
+          {images.map((image, index) => (
+            <div key={index} className="flex space-x-2 mb-2">
+              <input
+
+                type="text"
+                placeholder="Image URL"
+                value={image}
+                onChange={(e) =>
+                  setImages(
+                    images.map((i, idx) => (idx === index ? e.target.value : i))
+                  )
+                }
+                className="border rounded-md p-2 flex-grow"
+              />
+              <button
+
+                
+                type="button"
+                onClick={() => setImages(images.filter((_, idx) => idx !== index))}
+                className="bg-red-500 text-white rounded-md px-2 py-1"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+
+
+            type="button"
+            onClick={() => setImages([...images, ""])}
+            className="bg-blue-500 text-white rounded-md px-4 py-2"
+          >
+            Add Image
+          </button>
+        </div>
+        
+
+        {/* Videos */}
+        <div className="flex flex-col space-y-2">
+          <label className="font-semibold">Videos</label>
+          {videos.map((video, index) => (
+            <div key={index} className="flex space-x-2 mb-2">
+              <input
+                type="text"
+                placeholder="Video URL"
+                value={video}
+                onChange={(e) =>
+                  setVideos(
+                    videos.map((v, idx) => (idx === index ? e.target.value : v))
+                  )
+                }
+                className="border rounded-md p-2 flex-grow"
+              />
+              <button
+
+                type="button"
+                onClick={() => setVideos(videos.filter((_, idx) => idx !== index))}
+                className="bg-red-500 text-white rounded-md px-2 py-1"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+
+            type="button"
+            onClick={() => setVideos([...videos, ""])}
+            className="bg-blue-500 text-white rounded-md px-4 py-2"
+          >
+            Add Video
+          </button>
+        </div>
+
+
 
         {/* Courses */}
         <div className="flex flex-col space-y-2">
