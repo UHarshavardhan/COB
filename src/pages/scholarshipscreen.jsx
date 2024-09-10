@@ -54,15 +54,18 @@ const Scholarship_Screen = () => {
       </div>
     </div>
   
-    <div className="flex flex-col items-center px-10 p-6 bg-gray-100 min-h-screen">
+    <div className="flex flex-col items-center px-10 p-6  min-h-screen">
 
      
-      <div className="w-full h-64 bg-gray-200 rounded-lg mb-6">
-      
-        <div className="h-full w-full bg-gray-300">
-          <img src={scholarship.image} alt="scholarship"/>
-        </div>
-      </div>
+    <div className=" w-[100%] h-[500px] mb-10 bg-gray-200 object-contain rounded-lg mb-6 overflow-hidden">
+  <div className="h-full w-full">
+    <img
+      src={scholarship.link}
+      alt="scholarship"
+      className="h-full w-full object-cover"
+    />
+  </div>
+</div>
 
      
       <div className="w-full bg-white rounded-lg shadow-lg p-6">

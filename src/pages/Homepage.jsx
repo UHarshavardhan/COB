@@ -15,6 +15,7 @@ import Review from '../components/review.jsx';
 import Subscribe from "../components/subscribe.jsx";
 import MobileCollegeRanking from "../components/mobileCollegeRanking.jsx";
 import Carrers from "../components/carrers.jsx";
+import Carrershome from "../components/carrershome.jsx";
 
 function Homepage() {
   
@@ -101,7 +102,8 @@ function Homepage() {
                    <span className="font-pop font-semibold"> Popular Careers!</span>
                     </div>
                 </div>
-            <Carrers/>
+            {/* <Carrers/> */}
+            <Carrershome/>
             <div className="lg:block hidden mt-6"><CollegeRanking/></div>
             <div className="block lg:hidden"><MobileCollegeRanking /></div>
             <div className="lg:block hidden"><Aboutus/></div>
