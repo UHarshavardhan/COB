@@ -84,14 +84,14 @@ function Navigation() {
             {searchOpen && (
                 <div className='absolute min-h-[300px] z-50 rounded-md bg-white left-[30%] w-[600px]'>
                     <div className="w-full mx-auto mt-10 z-10 block">
-                        {/* Search Bar */}
+               
                         <div className="flex items-center border-2 border-gray-300 rounded-lg p-2">
                             <BiSearchAlt2 size={24} className="mr-2" />
                             <input
                                 type="text"
                                 value={searchTerm}
                                 onChange={handleSearch}
-                                placeholder="Search"
+                                placeholder="Search colleges"
                                 className="w-full focus:outline-none"
                             />
                         </div>
