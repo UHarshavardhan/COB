@@ -30,7 +30,7 @@ function Navigation() {
         const fetchColleges = async () => {
             try {
                 const allColleges = await getAllColleges();
-                setColleges(allColleges); // Store fetched colleges for suggestions
+                setColleges(allColleges); 
             } catch (error) {
                 console.error('Error fetching colleges:', error);
             }

@@ -3,11 +3,14 @@ import { useParams } from 'react-router-dom';
 import { getCollegeById } from '../firebase/College';
 import { createEnquiry } from '../firebase/college_Enquireform'; // Import createEnquiry function
 import ScholarshipHeader from '../components/ScholarshipHeader';
+import YouTube from 'react-youtube'; // Import YouTube component
 
 const Collegedetails = () => {
   const { id } = useParams(); // Get the college ID from the URL
   const [college, setCollege] = useState(null);
   const [activeTab, setActiveTab] = useState('about');
+  const [mediaType, setMediaType] = useState('images'); // Add state to toggle between images and videos
+  const [mediaIndex, setMediaIndex] = useState(0); // Track the current media index
   const [enquiry, setEnquiry] = useState({
     name: '',
     email: '',
@@ -59,6 +62,51 @@ const Collegedetails = () => {
     }
   };
 
+  const handleMediaChange = (type) => {
+    setMediaType(type);
+    setMediaIndex(0); // Reset index when media type changes
+  };
+
+  const handleNextMedia = () => {
+    setMediaIndex((prevIndex) =>
+      prevIndex < (mediaType === 'images' ? college?.images.length : college?.videos.length) - 1
+        ? prevIndex + 1
+        : 0
+    );
+  };
+
+  const handlePrevMedia = () => {
+    setMediaIndex((prevIndex) =>
+      prevIndex > 0
+        ? prevIndex - 1
+        : (mediaType === 'images' ? college?.images.length : college?.videos.length) - 1
+    );
+  };
+
+  const renderMedia = () => {
+    if (!college) return null;
+
+    if (mediaType === 'images') {
+      if(!college.images || college.images.length === 0) return null;
+      return (
+        <img
+          src={college?.images[mediaIndex]}
+          alt={`College media ${mediaIndex}`}
+          className="w-full h-full object-cover"
+        />
+      );
+    } else if (mediaType === 'videos') {
+      if(!college.videos || college.videos.length === 0) return null;
+      const videoId = college?.videos[mediaIndex].split('v=')[1];
+      return (
+        <div className="relative mx-[10%] w-full h-auto item-center overflow-hidden">
+          <YouTube videoId={videoId} className="w-full h-full" />
+        </div>
+
+      );
+    }
+  };
+
   const renderContent = () => {
     if (!college) return null;
 
@@ -70,7 +118,6 @@ const Collegedetails = () => {
             <div className="text-gray-700 whitespace-pre-line">{college.overview}</div>
           </div>
         );
-          
       case 'highlights':
         return (
           <div>
@@ -78,14 +125,10 @@ const Collegedetails = () => {
             <table className="min-w-full bg-white border border-gray-200">
               <tbody>
                 {college.highlights.map((highlight, index) => (
-                    <>
                   <tr key={index} className="border">
                     <td className="px-4 py-2 border">{highlight?.details}</td>
-                  <td className="px-4 py-2 border">{highlight?.highlight}</td>
-
+                    <td className="px-4 py-2 border">{highlight?.highlight}</td>
                   </tr>
-               
-                </>
                 ))}
               </tbody>
             </table>
@@ -100,33 +143,27 @@ const Collegedetails = () => {
                 {college.courses.map((course, index) => (
                   <tr key={index} className="border-b">
                     <td className="px-4 py-2">{course?.course}</td>
-                    <td className="px-4 py-2">{course?.details}</td> 
+                    <td className="px-4 py-2">{course?.details}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         );
-        case 'admission':
-            return (
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Admission</h2>
-                <div className="text-gray-700 whitespace-pre-line">
-                  {college.admission}
-                </div>
-              </div>
-            );
-          
-          case 'placement':
-            return (
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Placement</h2>
-                <div className="text-gray-700 whitespace-pre-line">
-                  {college.placement}
-                </div>
-              </div>
-            );
-          
+      case 'admission':
+        return (
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Admission</h2>
+            <div className="text-gray-700 whitespace-pre-line">{college.admission}</div>
+          </div>
+        );
+      case 'placement':
+        return (
+          <div>
+            <h2 className="text-xl font-semibold mb-2">Placement</h2>
+            <div className="text-gray-700 whitespace-pre-line">{college.placement}</div>
+          </div>
+        );
       default:
         return null;
     }
@@ -134,23 +171,50 @@ const Collegedetails = () => {
 
   return (
     <>
-      <ScholarshipHeader 
-        breadcrumb="Home &gt; College Details" 
-        title={college ? college.name : "College Details"} 
+      <ScholarshipHeader
+        breadcrumb="Home &gt; College Details"
+        title={college ? college.name : 'College Details'}
         subtitle="Explore detailed information about this college."
       />
       <div className="min-h-screen lg:mx-[4%] flex flex-col items-center">
         <div className="w-full p-6 mt-6 flex flex-col lg:flex-row">
           {/* Left Section */}
           <div className="lg:w-3/5 lg:pr-6 w-full">
-            {/* College Image and Video */}
-            <div className="bg-gray-200 h-56 rounded-lg flex items-center justify-center">
-              <img
-                src={college ? college.image : ''}
-                alt={college ? college.name : ''}
-                className="w-full h-full object-cover"
-              />
+            {/* Toggle Buttons for Images and Videos */}
+            <div className="flex space-x-4 mb-4">
+              <button
+                className={`px-4 py-2 rounded-lg ${
+                  mediaType === 'images' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
+                }`}
+                onClick={() => handleMediaChange('images')}
+              >
+                Images
+              </button>
+              <button
+                className={`px-4 py-2 rounded-lg ${
+                  mediaType === 'videos' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
+                }`}
+                onClick={() => handleMediaChange('videos')}
+              >
+                Videos
+              </button>
             </div>
+
+            {/* Media Display */}
+            <div className="h-[350px] rounded-lg flex items-center justify-center">
+              {renderMedia()}
+            </div>
+
+            {/* Media Navigation */}
+            <div className="flex justify-between mt-4">
+              <button onClick={handlePrevMedia} className="text-indigo-600 font-bold">
+                Previous
+              </button>
+              <button onClick={handleNextMedia} className="text-indigo-600 font-bold">
+                Next
+              </button>
+            </div>
+
             {/* Tabs */}
             <div className="flex mt-4 space-x-4 overflow-auto">
               <button
@@ -194,86 +258,61 @@ const Collegedetails = () => {
                 Placement
               </button>
             </div>
-            {/* Content Section */}
-            <div className="mt-4">
-              {renderContent()}
-            </div>
+
+            {/* Tab Content */}
+            <div className="mt-6">{renderContent()}</div>
           </div>
 
           {/* Right Section */}
-          <div className="lg:w-2/5 lg:pl-6 w-full mt-6 lg:mt-0">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-xl font-semibold mb-4">Let's Get Connected</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <input 
-                    type="text" 
-                    name="name"
-                    value={enquiry.name}
-                    onChange={handleChange}
-                    placeholder="Name" 
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input 
-                    type="email" 
-                    name="email"
-                    value={enquiry.email}
-                    onChange={handleChange}
-                    placeholder="Email address" 
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input 
-                    type="tel" 
-                    name="phone"
-                    value={enquiry.phone}
-                    onChange={handleChange}
-                    placeholder="IN +91 Enter your phone number" 
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input 
-                    type="text" 
-                    name="course"
-                    value={enquiry.course}
-                    onChange={handleChange}
-                    placeholder="Course" 
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <textarea 
-                    name="message"
-                    value={enquiry.message}
-                    onChange={handleChange}
-                    placeholder="Message" 
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  ></textarea>
-                </div>
-                <div className="mb-4 flex items-center">
-                  <input 
-                    type="checkbox" 
-                    className="mr-2"
-                  />
-                  <label>I'm not a robot</label>
-                </div>
-                <button 
-                  type="submit" 
-                  className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-
-            {/* Social Icons */}
-            <div className="mt-4 flex justify-center space-x-6">
-              {/* Social Media Icons... */}
-            </div>
+          <div className="lg:w-2/5 lg:pl-6 mt-8 lg:mt-0 w-full">
+            <form onSubmit={handleSubmit} className="bg-white shadow-md p-6 rounded-lg">
+              <h2 className="text-xl font-bold mb-4">Submit an Enquiry</h2>
+              <input
+                className="w-full p-2 mb-4 border rounded-lg"
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={enquiry.name}
+                onChange={handleChange}
+              />
+              <input
+                className="w-full p-2 mb-4 border rounded-lg"
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={enquiry.email}
+                onChange={handleChange}
+              />
+              <input
+                className="w-full p-2 mb-4 border rounded-lg"
+                type="tel"
+                name="phone"
+                placeholder="Your Phone"
+                value={enquiry.phone}
+                onChange={handleChange}
+              />
+              <input
+                className="w-full p-2 mb-4 border rounded-lg"
+                type="text"
+                name="course"
+                placeholder="Course of Interest"
+                value={enquiry.course}
+                onChange={handleChange}
+              />
+              <textarea
+                className="w-full p-2 mb-4 border rounded-lg"
+                name="message"
+                placeholder="Additional Message"
+                value={enquiry.message}
+                onChange={handleChange}
+              />
+              <button
+                type="submit"
+                className="w-full bg-indigo-600 text-white p-2 rounded-lg"
+              >
+                Submit Enquiry
+              </button>
+            </form>
           </div>
         </div>
       </div>

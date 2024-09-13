@@ -30,9 +30,9 @@ function SubCourses() {
     <>
       <ScholarshipHeader 
         breadcrumb="Home &gt; Popular Careers" 
-        title="Popular Careers To Apply For" 
-        subtitle="Here are some of the best courses"
-      />
+        title={category} 
+        subtitle= {`Here are some of the best carriers of ${category}`
+}      />
     <div className="flex justify-center items-center w-full mt-6">
       <div className="grid lg:grid-cols-3 grid-cols-1 lg:mx-15 mx-[5%] gap-5">
         {courses.map((item, index) => (

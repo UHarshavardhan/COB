@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ScholarshipHeader from '../components/ScholarshipHeader';
 import { createEnquiry } from '../firebase/course_Enquireform'; // Import createEnquiry function
+import YouTube from 'react-youtube'; // Import YouTube component
 
 import { readCourse } from '../firebase/Course'; // Import your readCourse function
 
@@ -12,6 +13,8 @@ const Coursedetails = () => {
   const [moreOption, setMoreOption] = useState(null);
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
+  const [mediaType, setMediaType] = useState('images'); // Add state to toggle between images and videos
+  const [mediaIndex, setMediaIndex] = useState(0); // Track the current media index
   const [enquiry, setEnquiry] = useState({
     name: '',
     email: '',
@@ -149,6 +152,56 @@ const Coursedetails = () => {
     }
   };
 
+  const handleMediaChange = (type) => {
+    setMediaType(type);
+    setMediaIndex(0); // Reset index when media type changes
+  };
+
+  const handleNextMedia = () => {
+    setMediaIndex((prevIndex) =>
+      prevIndex < (mediaType === 'images' ? course.images.length : course.videos.length) - 1
+        ? prevIndex + 1
+        : 0
+    );
+  };
+
+  const handlePrevMedia = () => {
+    setMediaIndex((prevIndex) =>
+      prevIndex > 0
+        ? prevIndex - 1
+        : (mediaType === 'images' ? course.images.length : course.videos.length) - 1
+    );
+  };
+
+  const renderMedia = () => {
+    if (!course) return null;
+
+    if (mediaType === 'images') {
+      if (!course.images || course.images.length === 0) {
+        return <p>No images available</p>;
+      }
+      return (
+        <img
+          src={course.images[mediaIndex]}
+          alt={`College media ${mediaIndex}`}
+          className="w-full h-full object-cover"
+        />
+      );
+    } else if (mediaType === 'videos') {
+      if (!course.videos || course.videos.length === 0) {
+        return <p>No videos available</p>;
+      }
+      
+      const videoId = course.videos[mediaIndex].split('v=')[1];
+      return (
+        <div className="relative mx-[10%] w-full h-auto item-center overflow-hidden">
+          <YouTube videoId={videoId} className="w-full h-full" />
+        </div>
+
+      );
+    }
+  };
+
   return (
     <>
       <ScholarshipHeader
@@ -160,18 +213,38 @@ const Coursedetails = () => {
         <div className="w-full p-6 mt-6 flex flex-col lg:flex-row">
           {/* Left Section */}
           <div className="lg:w-3/5 lg:pr-6 w-full">
-            {/* Video Section */}
-            <div className="bg-gray-200 h-56 rounded-lg flex items-center justify-center">
-              {course?.video ? (
-                <video className="w-full h-full" controls>
-                  <source src={course.video} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                <button className="bg-blue-600 text-white p-4 rounded-full">
-                  ▶️ Watch Video
-                </button>
-              )}
+          <div className="flex space-x-4 mb-4">
+              <button
+                className={`px-4 py-2 rounded-lg ${
+                  mediaType === 'images' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
+                }`}
+                onClick={() => handleMediaChange('images')}
+              >
+                Images
+              </button>
+              <button
+                className={`px-4 py-2 rounded-lg ${
+                  mediaType === 'videos' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'
+                }`}
+                onClick={() => handleMediaChange('videos')}
+              >
+                Videos
+              </button>
+            </div>
+
+            {/* Media Display */}
+            <div className="h-[350px] rounded-lg flex items-center justify-center">
+              {renderMedia()}
+            </div>
+
+            {/* Media Navigation */}
+            <div className="flex justify-between mt-4">
+              <button onClick={handlePrevMedia} className="text-indigo-600 font-bold">
+                Previous
+              </button>
+              <button onClick={handleNextMedia} className="text-indigo-600 font-bold">
+                Next
+              </button>
             </div>
 
             {/* Tabs */}

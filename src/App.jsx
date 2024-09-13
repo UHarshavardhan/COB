@@ -33,6 +33,7 @@ import Scholarship_Screen from './pages/scholarshipscreen.jsx';
 import CollegeEnquireFormComponent from './components/admin/CollegeEnquireFormComponent.jsx';
 import CourseEnquireFormComponent from './components/admin/CourseEnquireFormComponent.jsx';
 import Popularcareers2 from './pages/popularcareers2.jsx';
+import NewsletterAdmin from './components/admin/Newsletter.jsx';
 
 
 function App() {
@@ -77,6 +78,8 @@ function App() {
         return   <CollegeEnquireFormComponent />
       case 'CourseEnquiry':
         return   <CourseEnquireFormComponent />
+      case 'Newsletter':
+        return <NewsletterAdmin />;
       default:
         return <Blogs/>;
     }

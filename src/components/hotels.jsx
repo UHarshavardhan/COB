@@ -34,170 +34,135 @@ function Hotels() {
                 : [...prev, amenity]
         );
     };
-    const handelSortchange = (order)=>{
-        console.log(order);
+
+    const handleSortChange = (order) => {
         setSortOrder(order);
-        const sortedhotels=[...hotels].sort((a,b)=>{
-            if(order === 'lowToHigh'){
-                console.log(a.price);
-                console.log(b.price);
-              return   a.price - b.price;
-            }
-            else if (order === 'highToLow') {
-                return  b.price - a.price;
+        const sortedHotels = [...hotels].sort((a, b) => {
+            if (order === 'lowToHigh') {
+                return a.price - b.price;
+            } else if (order === 'highToLow') {
+                return b.price - a.price;
             }
             return 0;
         });
-     setHotels(sortedhotels);
+        setHotels(sortedHotels);
     };
-    const handelrange=(budget)=>{
-        const budgetHotels=[...hotels].filter((hotel)=>{
-               return hotel.price<=budget;
-        })
-        setHotels(budgetHotels);
-    }
-    const handlePropertyType =(type)=>{
-        console.log(type);
-            const property=[...hotels].filter((hotel)=>{
-               return hotel.propertyType === type
-            });
-        setHotels(property);
-    }
 
+    const handleBudgetChange = (budget) => {
+        const filteredHotels = [...hotels].filter((hotel) => hotel.price <= budget);
+        setHotels(filteredHotels);
+    };
 
+    const handlePropertyType = (type) => {
+        const filteredHotels = [...hotels].filter((hotel) => hotel.propertyType === type);
+        setHotels(filteredHotels);
+    };
 
     return (
         <>
-            <div className="flex flex-col ">
-                <div className="flex flex-row justify-start">
-                    <div className="flex flex-col justify-start w-[418px] p-6 bg-purple-50 rounded-lg shadow-lg ml-2 h-[1280px]">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-xl font-semibold">Filters</h2>
-                            <button className="text-gray-400 text-sm">Reset all</button>
+            <div className="flex mt-10 p-2 flex-col lg:flex-row">
+                <div className="flex flex-col lg:w-1/3 p-6 bg-purple-50 rounded-lg shadow-lg h-full lg:h-auto">
+                    <div className="flex justify-between items-center mb-4">
+                        <h2 className="text-xl font-semibold">Filters</h2>
+                        <button className="text-gray-400 text-sm">Reset all</button>
+                    </div>
+                    <hr className="mb-4" />
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold">Sort By</h3>
+                        <div className="flex flex-col text-sm text-gray-600">
+                            <label className="flex items-center">
+                                <input type="radio" name="sort" className="mr-2" checked={sortOrder === 'lowToHigh'} onChange={() => handleSortChange('lowToHigh')} />
+                                Price: Low to high
+                            </label>
+                            <label className="flex items-center">
+                                <input type="radio" name="sort" className="mr-2" checked={sortOrder === 'highToLow'} onChange={() => handleSortChange('highToLow')} />
+                                Price: High to low
+                            </label>
                         </div>
-                        <hr className="mb-4" />
-                        <div className="mb-4">
-                            <h3 className="text-lg font-semibold">Sort By</h3>
-                            <div className="flex flex-col text-sm text-gray-600">
-                                <label className="flex items-center">
-                                    <input type="radio" name="sort" className="mr-2" checked={sortOrder === 'lowToHigh'} onChange={() => handelSortchange('lowToHigh')} />
-                                    Price: Low to high
-                                </label>
-                                <label className="flex items-center">
-                                    <input type="radio" name="sort" className="mr-2" checked={sortOrder === 'highToLow'} onChange={() => handelSortchange('highToLow')}/>
-                                    Price: High to low
-                                </label>
-                            </div>
+                    </div>
+                    <hr className="mb-4" />
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold">Budget (per week)</h3>
+                        <div className="flex justify-between text-sm text-gray-600">
+                            <span>0</span>
+                            <span>1000</span>
                         </div>
-                        <hr className="mb-4" />
-                        <div className="mb-4">
-                            <h3 className="text-lg font-semibold">Budget (per week)</h3>
-                            <div className="flex justify-between text-sm text-gray-600">
-                                <span>0</span>
-                                <span>1000</span>
-                            </div>
-                            <input
-                                type="range"
-                                min="0"
-                                max="1000"
-                                value={budget}
-                                onChange={(e) => {setBudget(e.target.value);
-                                    handelrange(e.target.value);
-                                }}
-                                
-                                className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer mb-2"
-                            />
-                        </div>
-                        <hr className="mb-4" />
-                        <div className="mb-4">
-                            <h3 className="text-lg font-semibold">Property Type</h3>
-                            <div className="flex flex-col text-sm text-gray-600">
-                                <label className="flex items-center">
+                        <input
+                            type="range"
+                            min="0"
+                            max="1000"
+                            value={budget}
+                            onChange={(e) => {
+                                setBudget(e.target.value);
+                                handleBudgetChange(e.target.value);
+                            }}
+                            className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer mb-2"
+                        />
+                    </div>
+                    <hr className="mb-4" />
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold">Property Type</h3>
+                        <div className="flex flex-col text-sm text-gray-600">
+                            {['Entire Place', 'Private room', 'Shared room'].map((type) => (
+                                <label key={type} className="flex items-center">
                                     <input
                                         type="radio"
                                         name="propertyType"
-                                        value="Entire Place"
-                                        checked={propertyType === 'Entire Place'}
-                                        onChange={() =>{ handlePropertyTypeChange('Entire Place');handlePropertyType('Entire Place');
-
+                                        value={type}
+                                        checked={propertyType === type}
+                                        onChange={() => {
+                                            handlePropertyTypeChange(type);
+                                            handlePropertyType(type);
                                         }}
                                         className="mr-2"
                                     />
-                                    Entire Place
+                                    {type}
                                 </label>
-                                <label className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="propertyType"
-                                        value="Private room"
-                                        checked={propertyType === 'Private room'}
-                                        onChange={() => {handlePropertyTypeChange('Private room');handlePropertyType('Private room')}}
-                                        className="mr-2"
-                                    />
-                                    Private room
-                                </label>
-                                <label className="flex items-center">
-                                    <input
-                                        type="radio"
-                                        name="propertyType"
-                                        value="Shared room"
-                                        checked={propertyType === 'Shared room'}
-                                        onChange={() =>{handlePropertyTypeChange('Shared room');handlePropertyType('Shared room')}}
-                                        className="mr-2"
-                                    />
-                                    Shared room
-                                </label>
-                            </div>
+                            ))}
                         </div>
-                        <hr className="mb-4" />
-                        <div className="mb-4">
-                            <h3 className="text-lg font-semibold">Amenities</h3>
-                            <div className="flex flex-wrap gap-2 text-sm text-gray-600">
-                                {['24/7 Security + CCTV', 'Accessibility', 'Central Heating', 'Advice', 'Catering', 'Kitchen', 'Breakfast', 'Air Conditioning', 'Laundry', 'Cinema Room', 'Flexible', 'On-Site Gym', 'On-Site Maintenance', 'Swimming Pool'].map((amenity) => (
-                                    <button
-                                        key={amenity}
-                                        onClick={() => handleAmenityToggle(amenity)}
-                                        className={`px-3 py-1 rounded-full border ${amenities.includes(amenity) ? 'bg-blue-200' : ''}`}
-                                    >
-                                        {amenity}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        
                     </div>
-                    <div className="grid grid-cols-2 gap-9 ml-14">
+                    <hr className="mb-4" />
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold">Amenities</h3>
+                        <div className="flex flex-wrap gap-2 text-sm text-gray-600">
+                            {['24/7 Security + CCTV', 'Accessibility', 'Central Heating', 'Advice', 'Catering', 'Kitchen', 'Breakfast', 'Air Conditioning', 'Laundry', 'Cinema Room', 'Flexible', 'On-Site Gym', 'On-Site Maintenance', 'Swimming Pool'].map((amenity) => (
+                                <button
+                                    key={amenity}
+                                    onClick={() => handleAmenityToggle(amenity)}
+                                    className={`px-3 py-1 rounded-full border ${amenities.includes(amenity) ? 'bg-blue-200' : ''}`}
+                                >
+                                    {amenity}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                <div className="flex-1 lg:ml-14">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:grid-cols-2">
                         {hotels.map((item, index) => (
-                            <div className="flex flex-col w-[348px] h-[483px] shadow-lg" key={index}>
-                                <div className="flex">
-                                    <img src={item.image} alt={item.image} className="w-[348px] h-[240px]" />
-                                </div>
-
-                                <div className="flex flex-col mt-3 ml-2">
-                                    <span className="text-[20px]">{item.name}</span>
-
-                                    <div className="flex items-center text-[10px] text-slate-400">
+                            <div className="flex flex-col shadow-lg rounded-lg overflow-hidden" key={index}>
+                                <img src={item.image} alt={item.name} className="w-full h-64 object-cover" />
+                                <div className="p-4">
+                                    <span className="text-xl font-semibold">{item.name}</span>
+                                    <div className="flex items-center text-sm text-slate-400 mt-2">
                                         <CiLocationOn className="mr-1" />
                                         <span>{item.location}</span>
                                     </div>
-
-                                    <div className="flex items-center text-[10px] text-slate-400">
+                                    <div className="flex items-center text-sm text-slate-400 mt-2">
                                         <HiOutlineBuildingOffice className="mr-1" />
                                         <span>{item.place}</span>
                                     </div>
-
-                                    <div className="flex mt-2">
-                                        <span className="text-[13px] text-slate-400 mr-1 mt-2">From</span>
-                                        <span className="mt-1">{item.price}</span>
+                                    <div className="flex items-center mt-2">
+                                        <span className="text-sm text-slate-400 mr-1">From</span>
+                                        <span className="text-lg font-semibold">{item.price}</span>
                                     </div>
-                                    <div className="flex items-center text-[10px] text-slate-400 mt-2">
+                                    <div className="flex items-center text-sm text-slate-400 mt-2">
                                         <MdOutlineBed className="mr-1" />
                                         <span>{item.options} room options</span>
                                     </div>
                                 </div>
-
-                                <div className="mt-4 flex justify-center">
-                                    <button className="text-[16px] border-2 border-black text-center w-[248px] h-[56px] rounded-xl">
+                                <div className="mt-4 flex justify-center pb-4">
+                                    <button className="text-lg border-2 border-black text-center w-full h-14 rounded-xl">
                                         Enquire Now
                                     </button>
                                 </div>
@@ -205,17 +170,21 @@ function Hotels() {
                         ))}
                     </div>
                 </div>
+            </div>
 
-                <div className='FAQ flex flex-col mt-5 justify-start items-start'>
-                    <span className='text-[36px]'>Frequently asked questions</span>
-                    <button className='w-[1282px] h-[89px] bg-[#9598FF4D] my-3 rounded-lg flex justify-start items-center'>Who are we?</button>
-                    <button className='w-[1282px] h-[89px] bg-[#9598FF4D] my-3 rounded-lg'>What kind of student housing do we offer?</button>
-                    <button className='w-[1282px] h-[89px] bg-[#9598FF4D] my-3 rounded-lg'>Will my deposit and rent be refunded if I cancel my booking?</button>
-                    <button className='w-[1282px] h-[89px] bg-[#9598FF4D] my-3 rounded-lg'>How much time does it take to get the refund?</button>
-                    <button className='w-[1282px] h-[89px] bg-[#9598FF4D] my-3 rounded-lg'>How do I know my accommodation is safe?</button>
-                    <button className='w-[1282px] h-[89px] bg-[#9598FF4D] my-3 rounded-lg'>How much time does it take to get the refund?</button>
-                    <button className='w-[1282px] h-[89px] bg-[#9598FF4D] my-3 rounded-lg'>How do I know my accommodation is safe?</button>
-                </div>
+            <div className='FAQ flex flex-col mt-5'>
+                <span className='text-2xl lg:text-3xl font-semibold mb-4'>Frequently Asked Questions</span>
+                {[
+                    'Who are we?',
+                    'What kind of student housing do we offer?',
+                    'Will my deposit and rent be refunded if I cancel my booking?',
+                    'How much time does it take to get the refund?',
+                    'How do I know my accommodation is safe?'
+                ].map((question, index) => (
+                    <button key={index} className='w-full h-20 bg-[#9598FF4D] my-2 rounded-lg flex justify-start items-center px-4 text-left'>
+                        {question}
+                    </button>
+                ))}
             </div>
         </>
     );

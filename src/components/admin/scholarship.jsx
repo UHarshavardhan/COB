@@ -338,7 +338,7 @@ const ScholarshipForm = ({ scholarship, onSubmit }) => {
           />
         </div>
         <div className="col-span-1">
-          <label className="block text-sm font-semibold mb-1">Link</label>
+          <label className="block text-sm font-semibold mb-1">Image Link</label>
           <input
             type="text"
             name="link"
