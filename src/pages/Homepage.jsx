@@ -162,8 +162,8 @@ function Homepage() {
                    <span className="font-pop font-semibold"> Popular Careers!</span>
                     </div>
                 </div>
-            {/* <Carrers/> */}
-            <Carrershome/>
+        <Carrers/> 
+           
             <div className="lg:block hidden mt-6"><CollegeRanking/></div>
             <div className="block lg:hidden"><MobileCollegeRanking /></div>
             <div className="lg:block hidden"><Aboutus/></div>
