@@ -15,7 +15,7 @@ import Review from '../components/review.jsx';
 import Subscribe from "../components/subscribe.jsx";
 import MobileCollegeRanking from "../components/mobileCollegeRanking.jsx";
 import Carrers from "../components/carrers.jsx";
-
+import blue from '../images/blue.svg'
 function Homepage() {
   
     return (
@@ -61,6 +61,67 @@ function Homepage() {
                         <button className='bg-indigo-800 text-white h-12 w-44 rounded-xl flex items-center justify-center mr-2'>
                         Enquire <BsArrowRight className="ml-2" />
                         </button>
+                    </div>
+                    <div  className=" absolute left-1 bottom-1.5 bg-blend-screen ">
+                    
+                    
+  <svg
+    width="1013"
+    height="678"
+    viewBox="0 0 1000 678"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <mask
+      id="mask0_41_68"
+      style={{ maskType: 'alpha' }}
+      maskUnits="userSpaceOnUse"
+      x="-576"
+      y="-363"
+      width="1166"
+      height="1340"
+    >
+      <g clipPath="url(#clip0_41_68)">
+        <path
+          d="M180.986 527.693L227.804 846.085L417.114 703.445L505.175 492.561L466.299 450.99L239.858 472.364L-6.73832 450.694L-85.2519 391.997L-56.0069 309.762L70.4568 206.073L-279.546 172.086L-368.495 -141.987L-471.796 155.048L-279.556 173.425L-122.186 729.403L180.986 527.693Z"
+          fill="black"
+        />
+      </g>
+    </mask>
+    <g mask="url(#mask0_41_68)">
+      <rect
+        opacity="0.2"
+        x="10.0001"
+        y="-363"
+        width="1155"
+        height="678.004"
+        transform="rotate(60 12.0001 -363)"
+        fill="url(#paint0_linear_41_68)"
+      />
+    </g>
+    <defs>
+      <linearGradient
+        id="paint0_linear_41_68"
+        x1=".502"
+        y1=".25"
+        x2="85.504"
+        y2=".243"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="#2E3192" />
+        <stop offset="1" stopColor="#B8F1EB" />
+      </linearGradient>
+      <clipPath id="clip0_41_68">
+        <rect
+          width="1155"
+          height="678.004"
+          fill="white"
+          transform="translate(12.0001 -363) rotate(60)"
+        />
+      </clipPath>
+    </defs>
+  </svg>
+
                     </div>
                     </div>
                 </div>
