@@ -7,6 +7,7 @@ import {
   deleteAccommodation
 } from './../../firebase/Accomodation'; // Adjust the import path as needed
 import { getAllColleges } from './../../firebase/College'; // Adjust the import path as needed
+import ExportToExcel from "./ExportToExcel";
 
 
 const itemsPerPage = 7;
@@ -96,12 +97,12 @@ const AccommodationAdmin = () => {
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Accommodations</h1>
         <div className="flex space-x-4">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" onClick={() => setIsAddOpen(true)}>
+          <button className="bg-blue-500  mt-10 text-white px-4 py-2 rounded-lg hover:bg-blue-600" onClick={() => setIsAddOpen(true)}>
             + NEW
           </button>
         </div>
       </div>
-
+      <ExportToExcel data={accommodations} fileName="Accommodations" />
       <table className="min-w-full bg-white rounded-lg shadow-md">
         <thead>
           <tr className="bg-gray-100 text-left">

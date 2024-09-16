@@ -41,14 +41,14 @@ function Navigation() {
 
     return (
         <>
-            <div className='navi bg-white rounded-lg h-24 gap-16 flex items-center justify-between px-4'>
+            <div className='navi bg-white rounded-lg h-24 md:h-20 gap-8 md:gap-16 flex items-center justify-between px-4'>
                 <div>
                     <a href="/">
-                        <img src={logo} alt="Logo" className='h-40' />
+                        <img src={logo} alt="Logo" className='h-16 md:h-20' />
                     </a>
                 </div>
-                <div className='md:flex flex-grow flex'>
-                    <div className='flex flex-row gap-16 font-serif'>
+                <div className='hidden md:flex flex-grow flex'>
+                    <div className='flex flex-row gap-6 md:gap-16 font-serif'>
                         <a href="/careers" className='Careers font-pop'>
                             <p>Careers</p>
                         </a>
@@ -66,11 +66,11 @@ function Navigation() {
                 <div className='hidden md:flex flex justify-center items-center'>
                     <div className='flex flex-row font-serif justify-end items-center'>
                         <a className='search'>
-                            <button onClick={() => setSearchOpen(!searchOpen)}><BiSearchAlt2 size={34} /></button>
+                            <button onClick={() => setSearchOpen(!searchOpen)}><BiSearchAlt2 size={30} /></button>
                         </a>
                         <PiLineVerticalThin size={34} />
                         <a href="/enquire" className='Enquire'>
-                            <button className='bg-indigo-800 text-white h-12 w-44 rounded-xl font-pop font-bold'>Enquire Now</button>
+                            <button className='bg-indigo-800 text-white h-10 md:h-12 w-32 md:w-44 rounded-lg font-pop font-bold'>Enquire Now</button>
                         </a>
                     </div>
                 </div>
@@ -82,9 +82,8 @@ function Navigation() {
             </div>
 
             {searchOpen && (
-                <div className='absolute min-h-[300px] z-50 rounded-md bg-white left-[30%] w-[600px]'>
+                <div className='absolute min-h-[300px] z-50 rounded-md bg-white left-[5%] md:left-[30%] w-[90%] md:w-[600px]'>
                     <div className="w-full mx-auto mt-10 z-10 block">
-               
                         <div className="flex items-center border-2 border-gray-300 rounded-lg p-2">
                             <BiSearchAlt2 size={24} className="mr-2" />
                             <input
@@ -119,29 +118,29 @@ function Navigation() {
             )}
 
             {isMenuOpen && (
-                <div className='md:hidden fixed top-0 left-0 w-full h-full shadow-lg z-50'>
+                <div className='md:hidden fixed top-0 left-0 w-full h-full shadow-lg z-50 bg-white'>
                     <div className='flex flex-col items-center bg-[white] mt-20'>
                         <div className='w-full flex justify-end pr-4'>
                             <button onClick={() => setIsMenuOpen(false)} className='text-3xl'>X</button>
                         </div>
-                        <div className='flex flex-col gap-8 font-serif'>
-                            <a href="/careers" className='Careers text-xl'>
+                        <div className='flex flex-col gap-6 md:gap-8 font-serif'>
+                            <a href="/careers" className='Careers text-lg md:text-xl'>
                                 <p>Careers</p>
                             </a>
-                            <a href="/colleges" className='Colleges text-xl'>
+                            <a href="/colleges" className='Colleges text-lg md:text-xl'>
                                 <p>Colleges</p>
                             </a>
-                            <a href="/find-scholarship" className='Find-scholarship text-xl'>
+                            <a href="/find-scholarship" className='Find-scholarship text-lg md:text-xl'>
                                 <p>Find scholarship</p>
                             </a>
-                            <a href="/housing" className='Housing text-xl'>
+                            <a href="/housing" className='Housing text-lg md:text-xl'>
                                 <p>Housing</p>
                             </a>
-                            <a href="/search" className='search text-xl'>
+                            <a href="/search" className='search text-lg md:text-xl'>
                                 <p><BiSearchAlt2 size={34} /></p>
                             </a>
                             <a href="/enquire" className='Enquire'>
-                                <button className='bg-indigo-800 text-white h-12 w-44 rounded-xl mt-4'>Enquire Now</button>
+                                <button className='bg-indigo-800 text-white h-10 w-32 md:w-44 rounded-lg mt-4'>Enquire Now</button>
                             </a>
                         </div>
                     </div>

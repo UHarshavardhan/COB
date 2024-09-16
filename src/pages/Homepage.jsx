@@ -65,7 +65,7 @@ function Homepage() {
                     <div  className=" absolute left-1 bottom-1.5 bg-blend-screen ">
                     
                     
-  <svg
+  {/* <svg
     width="1013"
     height="678"
     viewBox="0 0 1000 678"
@@ -120,7 +120,7 @@ function Homepage() {
         />
       </clipPath>
     </defs>
-  </svg>
+  </svg> */}
 
                     </div>
                     </div>

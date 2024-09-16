@@ -67,7 +67,7 @@ const NewsletterAdmin = () => {
               <td className="py-2 px-4 border-b">{startIdx + index + 1}</td>
               <td className="py-2 px-4 border-b">{response.email}</td>
               <td className="py-2 px-4 border-b">{response.phone}</td>
-              <td className="py-2 px-4 border-b">{response.course}</td>
+              {/* <td className="py-2 px-4 border-b">{response.course}</td> */}
             </tr>
           ))}
         </tbody>

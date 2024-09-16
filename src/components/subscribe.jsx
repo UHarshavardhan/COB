@@ -57,7 +57,7 @@ function Subscribe() {
                             required
                         />
                     </div>
-                    <select 
+                    {/* <select 
                         value={course}
                         onChange={(e) => setCourse(e.target.value)}
                         className="w-full md:w-1/2 h-12 border border-black rounded-lg px-4 text-black"
@@ -68,7 +68,7 @@ function Subscribe() {
                         <option value="MBA">MBA</option>
                         <option value="Statistics">Statistics</option>
                         <option value="Aviation">Aviation</option>
-                    </select>
+                    </select> */}
                     <button 
                         type="submit" 
                         className="w-[400px] h-12 bg-[#2E3192] text-white rounded-lg"

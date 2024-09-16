@@ -194,10 +194,10 @@ const ScholarshipList = () => {
           <div className="w-full  font-semibold ">
                 {/* Table Header */}
                 <div className="flex mb-2 bg-white font-bold  px-5 rounded  justify-between border shadow-md  border-gray-200 p-2 font-semibold">
-                  <div className="flex-1 text-left w-[10%]">Sr no.</div>
+                  <div className="flex-1 lg:block hidden text-left w-[10%]">Sr no.</div>
                   <div className="flex-2 text-left  w-[40%]">Scholarship</div>
-                  <div className="flex-1 text-left  w-[20%]">Deadline</div>
-                  <div className="flex-1 text-left  w-[20%]">Amount</div>
+                  <div className="flex-1 lg:block hidden text-left  w-[20%]">Deadline</div>
+                  <div className="flex-1 lg:block hidden text-left  w-[20%]">Amount</div>
                   <div className="flex-1"></div>
                 </div>
 
@@ -207,13 +207,13 @@ const ScholarshipList = () => {
                     key={scholarship.id}
                     className="flex items-center px-5 my-2 rounded shadow-md  bg-white border border-gray-200 p-2"
                   >
-                    <div className="flex-1 text-left w-[10%]">{(currentPage - 1) * itemsPerPage + index + 1}</div>
-                    <div className="flex-2 text-left w-[40%]">
+                    <div className="flex-1 lg:block hidden text-left w-[10%]">{(currentPage - 1) * itemsPerPage + index + 1}</div>
+                    <div className="flex-2 text-left w-[55%] lg:w-[40%]">
                       {scholarship.name}
                       <br />
                       {"scholarship program"}</div>
-                    <div className="flex-1 text-left w-[20%]">{scholarship.deadline}</div>
-                    <div className="flex-1  text-left w-[20%]">{scholarship.amount}</div>
+                    <div className="flex-1 lg:block hidden text-left w-[20%]">{scholarship.deadline}</div>
+                    <div className="flex-1 lg:block hidden text-left w-[20%]">{scholarship.amount}</div>
                     <div className="flex-1 text-right">
                       <button
                         onClick={() => handleView(scholarship.id)}
