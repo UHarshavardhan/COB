@@ -93,7 +93,9 @@ const AccommodationAdmin = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 mt-[4%]">
+      <ExportToExcel data={accommodations} fileName="accommodations" />
+
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Accommodations</h1>
         <div className="flex space-x-4">

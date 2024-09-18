@@ -6,6 +6,7 @@ import {
   updatenewsPost,
   deletenewsPost,
 } from '../../firebase/news'; // Adjust the path as needed
+import ExportToExcel from './ExportToExcel';
 
 const News = () => {
   const [news, setnews] = useState([]);
@@ -90,7 +91,9 @@ const News = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg">
+    <div className="p-4 mt-[4%] bg-white shadow-md rounded-lg">
+            <ExportToExcel data={news} fileName="news" />
+
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-xl font-semibold">news Management</h1>

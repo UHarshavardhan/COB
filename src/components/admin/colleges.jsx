@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import star from "../../images/star-1.png";
 import { createCollege, getAllColleges, updateCollege , deleteCollege} from "../../firebase/College";
+import ExportToExcel from "./ExportToExcel";
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -70,7 +71,7 @@ function Colleges() {
   };
 
   return (
-    <div className="container bg-white mx-auto mt-10 p-5">
+    <div className="container bg-white mx-auto mt-[4%] p-5">
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <p className="text-xl">Loading colleges...</p>
@@ -80,6 +81,8 @@ function Colleges() {
           {!showModal && (
             <>
               <h1 className="text-2xl font-bold mb-5">Colleges</h1>
+              <ExportToExcel data={colleges} fileName="colleges" />
+
 
               {/* Add College Button */}
               <button

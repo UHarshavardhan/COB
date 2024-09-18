@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid'; // Ensure uuid is installed and imported
 import AddCourse from './courseAdd'; 
 import { getAllCourses, createCourse, updateCourse , deleteCourse} from '../../firebase/Course'; // Import the functions to interact with the API
+import ExportToExcel from './ExportToExcel';
 
 function Courses() {
   const [courses, setCourses] = useState([]);
@@ -69,7 +70,9 @@ function Courses() {
   };
 
   return (
-    <div className="container bg-white mx-auto mt-10 p-5">
+    <div className="container mt-[4%] bg-white mx-auto mt-10 p-5">
+            <ExportToExcel data={courses} fileName="courses" />
+
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <p className="text-xl">Loading courses...</p>

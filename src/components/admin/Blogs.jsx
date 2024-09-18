@@ -6,6 +6,7 @@ import {
   updateBlogPost,
   deleteBlogPost,
 } from './../../firebase/blog'; // Adjust the path as needed
+import ExportToExcel from './ExportToExcel';
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -90,7 +91,9 @@ const Blogs = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg">
+    <div className="p-4 mt-[4%] bg-white shadow-md rounded-lg">
+            <ExportToExcel data={blogs} fileName="blogs" />
+
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-xl font-semibold">Blog Management</h1>

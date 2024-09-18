@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllScholarshipEnquiries } from '../../firebase/ScholarshipEnquiry';
+import ExportToExcel from './ExportToExcel';
 
 const ScholarshipEnquiry = () => {
   const [data, setData] = useState([]);
@@ -42,7 +43,9 @@ const ScholarshipEnquiry = () => {
   };
 
   return (
-    <div className='bg-white shadow-md rounded p-10'>
+    <div className='bg-white shadow-md rounded mt-[4%] p-10'>
+      <ExportToExcel data={data} fileName="scholarships_enquiry" />
+
       <div className='w-[155vh]'>
         <div className="overflow-x-auto">
           <table className="bg-white">

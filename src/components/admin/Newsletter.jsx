@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAllNewsletter } from '../../firebase/Newsletter'; // Adjust import path as needed
+import ExportToExcel from './ExportToExcel';
 
 const NewsletterAdmin = () => {
   const [responses, setResponses] = useState([]);
@@ -33,7 +34,9 @@ const NewsletterAdmin = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg">
+    <div className="p-4 mt-[4%] bg-white shadow-md rounded-lg">
+            <ExportToExcel data={responses} fileName="college_enquiry" />
+
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-xl font-semibold">User Newsletter</h1>

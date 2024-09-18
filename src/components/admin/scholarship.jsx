@@ -6,6 +6,7 @@ import {
   updateScholarship,
   deleteScholarship
 } from './../../firebase/Scholarships'; // Adjust the import path as needed
+import ExportToExcel from "./ExportToExcel";
 
 const Scholarships = () => {
   const [scholarships, setScholarships] = useState([]);
@@ -96,7 +97,9 @@ const Scholarships = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="mt-[3%] p-6">
+      <ExportToExcel data={scholarships} fileName="scholarships" />
+
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Scholarships</h1>
         <div className="flex space-x-4">

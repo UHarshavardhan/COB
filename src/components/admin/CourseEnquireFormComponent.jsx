@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAllEnquiries } from '../../firebase/course_Enquireform'; // Adjust import path as needed
+import ExportToExcel from './ExportToExcel';
 
 const CourseEnquireFormComponent = () => {
   const [responses, setResponses] = useState([]);
@@ -33,7 +34,9 @@ const CourseEnquireFormComponent = () => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg">
+    <div className="p-4 mt-[4%] bg-white shadow-md rounded-lg">
+            <ExportToExcel data={responses} fileName="carrier_enquiry" />
+
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-xl font-semibold">User Enquiries</h1>
