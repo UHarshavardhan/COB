@@ -144,6 +144,8 @@ const Collegedetails = () => {
                   <tr key={index} className="border-b">
                     <td className="px-4 py-2">{course?.course}</td>
                     <td className="px-4 py-2">{course?.details}</td>
+                    <td className="px-4 py-2">{course?.fee}</td>
+                    
                   </tr>
                 ))}
               </tbody>

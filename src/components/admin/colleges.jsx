@@ -246,7 +246,7 @@ function AddCollege({ college = {}, onSave, onCancel }) {
     setVideoLink("");
     setOverview("");
     setHighlights([{ highlight: "", details: "" }]);
-    setCourses([{ course: "", details: "" }]);
+    setCourses([{ course: "", details: "" ,  fee:"" }]);
     setAdmission("");
     setPlacement("");
     setInfrastructure("");
@@ -505,6 +505,22 @@ function AddCollege({ college = {}, onSave, onCancel }) {
                 }
                 className="border rounded-md p-2 flex-grow"
               />
+             {/* FEE */}
+             <input
+                type="text"
+                placeholder="Fee"
+                value={course.fee}
+                onChange={(e) =>
+                  setCourses(
+                    courses.map((c, idx) =>
+                      idx === index ? { ...c, fee: e.target.value } : c
+                    )
+                  )
+                }
+                className="border rounded-md p-2 flex-grow"
+              />
+              
+
               <button
                 type="button"
                 onClick={() =>
